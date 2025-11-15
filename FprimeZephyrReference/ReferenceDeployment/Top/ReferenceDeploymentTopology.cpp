@@ -13,6 +13,9 @@
 
 #include <zephyr/drivers/gpio.h>
 
+/*
+Edit Device Topology Here
+
 static const struct gpio_dt_spec ledGpio = GPIO_DT_SPEC_GET(DT_NODELABEL(led0), gpios);
 static const struct gpio_dt_spec burnwire0Gpio = GPIO_DT_SPEC_GET(DT_NODELABEL(burnwire0), gpios);
 static const struct gpio_dt_spec burnwire1Gpio = GPIO_DT_SPEC_GET(DT_NODELABEL(burnwire1), gpios);
@@ -25,6 +28,7 @@ static const struct gpio_dt_spec face5LoadSwitchGpio = GPIO_DT_SPEC_GET(DT_NODEL
 static const struct gpio_dt_spec payloadPowerLoadSwitchGpio = GPIO_DT_SPEC_GET(DT_NODELABEL(payload_pwr_enable), gpios);
 static const struct gpio_dt_spec payloadBatteryLoadSwitchGpio =
     GPIO_DT_SPEC_GET(DT_NODELABEL(payload_batt_enable), gpios);
+*/
 
 // Allows easy reference to objects in FPP/autocoder required namespaces
 using namespace ReferenceDeployment;
