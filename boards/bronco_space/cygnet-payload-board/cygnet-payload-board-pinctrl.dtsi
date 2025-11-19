@@ -1,0 +1,30 @@
+#include <zephyr/dt-bindings/pinctrl/rpi-pico-rp2350a-pinctrl.h>
+
+&pinctrl {
+
+	i2c0_default: i2c0_default {
+		group1 {
+			pinmux = <I2C0_SCL_P21>, <I2C0_SDA_P20>;
+			input-enable;
+		};
+	};
+	i2c1_default: i2c1_default {
+		group1 {
+			pinmux = <I2C1_SCL_P23>, <I2C1_SDA_P22>;
+			input-enable;
+		};
+	};
+	uart0_default: uart0_default{
+		group1{
+			pinmux = <UART0_TX_P0>, <UART0_RX_P1>;
+			input-enable;
+		}
+	}
+	uart1_default: uart1_default{
+		group1{
+			pinmux = <UART1_TX_P8>, <UART1_RX_P9>;
+			input-enable;
+		}
+	}
+	
+};
