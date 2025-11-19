@@ -69,7 +69,7 @@ void configureTopology() {
     // Rate groups require context arrays.
     rateGroup10Hz.configure(rateGroup10HzContext, FW_NUM_ARRAY_ELEMENTS(rateGroup10HzContext));
     rateGroup1Hz.configure(rateGroup1HzContext, FW_NUM_ARRAY_ELEMENTS(rateGroup1HzContext));
-
+/*
     gpioWatchdog.open(ledGpio, Zephyr::ZephyrGpioDriver::GpioConfiguration::OUT);
     gpioBurnwire0.open(burnwire0Gpio, Zephyr::ZephyrGpioDriver::GpioConfiguration::OUT);
     gpioBurnwire1.open(burnwire1Gpio, Zephyr::ZephyrGpioDriver::GpioConfiguration::OUT);
@@ -83,6 +83,8 @@ void configureTopology() {
     gpioface5LS.open(face5LoadSwitchGpio, Zephyr::ZephyrGpioDriver::GpioConfiguration::OUT);
     gpioPayloadPowerLS.open(payloadPowerLoadSwitchGpio, Zephyr::ZephyrGpioDriver::GpioConfiguration::OUT);
     gpioPayloadBatteryLS.open(payloadBatteryLoadSwitchGpio, Zephyr::ZephyrGpioDriver::GpioConfiguration::OUT);
+
+    */
 }
 
 // Public functions for use in main program are namespaced with deployment name ReferenceDeployment
@@ -112,6 +114,9 @@ void setupTopology(const TopologyState& state) {
 
     // We have a pipeline for both the LoRa and UART drive to allow for ground harness debugging an
     // for over-the-air communications.
+
+
+    /*
     lora.start(state.loraDevice, Zephyr::TransmitState::DISABLED);
     comDriver.configure(state.uartDevice, state.baudRate);
 
@@ -119,6 +124,8 @@ void setupTopology(const TopologyState& state) {
     lis2mdlManager.configure(state.lis2mdlDevice);
     ina219SysManager.configure(state.ina219SysDevice);
     ina219SolManager.configure(state.ina219SolDevice);
+
+    */
 }
 
 void startRateGroups() {

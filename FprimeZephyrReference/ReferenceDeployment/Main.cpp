@@ -34,6 +34,8 @@ int main(int argc, char* argv[]) {
     Os::init();
     // Object for communicating state to the topology
     ReferenceDeployment::TopologyState inputs;
+
+    /*
     inputs.ina219SysDevice = ina219Sys;
     inputs.ina219SolDevice = ina219Sol;
     inputs.loraDevice = lora;
@@ -42,6 +44,8 @@ int main(int argc, char* argv[]) {
     inputs.lis2mdlDevice = lis2mdl;
     inputs.rtcDevice = rtc;
     inputs.baudRate = 115200;
+*/
+
 
     // Setup, cycle, and teardown topology
     ReferenceDeployment::setupTopology(inputs);
