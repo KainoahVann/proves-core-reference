@@ -103,9 +103,9 @@ zephyr_udc0: &usbd {
 
 
 
-&i2c0 {
+&i2c1 {
 	status = "okay";
-	pinctrl-0 = <&i2c0_default>;
+	pinctrl-0 = <&i2c1_default>;
 	pinctrl-names = "default";
 	clock-frequency = <100000>;
 
@@ -125,7 +125,10 @@ zephyr_udc0: &usbd {
 		compatible = "ti,ina260";
 		reg = <0x45>;
 	};
-
+	tmp117: tmp117@48 {
+		compatible = "ti,tmp117";
+		reg = <0x48>;
+	};
 
 };
 
