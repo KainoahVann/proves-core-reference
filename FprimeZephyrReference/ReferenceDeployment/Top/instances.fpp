@@ -65,7 +65,7 @@ module ReferenceDeployment {
 
   instance gpioWatchdog: Zephyr.ZephyrGpioDriver base id 0x10014000
 
-  instance watchdog: Components.Watchdog base id 0x10015000
+  #instance watchdog: Components.Watchdog base id 0x10015000
 
   instance rtcManager: Drv.RtcManager base id 0x10016000
 
@@ -137,4 +137,5 @@ module ReferenceDeployment {
 
   instance startupManager: Components.StartupManager base id 0x1003F000
 
+  instance watchdogKai: Components.WatchdogKai base id 0x5000  
 }

@@ -42,9 +42,7 @@ telemetry packets ReferenceDeploymentPackets {
     fsSpace.TotalSpace
   }
 
-  packet Led id 5 group 4 {
-    ReferenceDeployment.watchdog.WatchdogTransitions
-  }
+  
 
   packet Imu id 6 group 4 {
     ReferenceDeployment.lsm6dsoManager.Acceleration
@@ -83,6 +81,13 @@ telemetry packets ReferenceDeploymentPackets {
     ReferenceDeployment.ina219SolManager.Power
     ReferenceDeployment.powerMonitor.TotalPowerConsumption
     ReferenceDeployment.powerMonitor.TotalPowerGenerated
+  }
+
+  packet watchdogKaiPackets id 5 group 4 {
+    ReferenceDeployment.watchdogKai.TimeSinceLastPet
+    ReferenceDeployment.watchdogKai.TotalPets
+    ReferenceDeployment.watchdogKai.WatchdogState
+    ReferenceDeployment.watchdogKai.TimeoutCount
   }
 
 } omit {

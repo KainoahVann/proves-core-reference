@@ -38,7 +38,7 @@ module ReferenceDeployment {
     instance gpioface5LS
     instance gpioPayloadPowerLS
     instance gpioPayloadBatteryLS
-    instance watchdog
+    #instance watchdog
     instance rtcManager
     instance imuManager
     instance lis2mdlManager
@@ -67,6 +67,9 @@ module ReferenceDeployment {
     instance ina219SysManager
     instance ina219SolManager
     instance resetManager
+
+     instance watchdogKai
+
 
 
   # ----------------------------------------------------------------------
@@ -162,7 +165,7 @@ module ReferenceDeployment {
       rateGroup1Hz.RateGroupMemberOut[1] -> CdhCore.$health.Run
       rateGroup1Hz.RateGroupMemberOut[2] -> ComCcsds.commsBufferManager.schedIn
       rateGroup1Hz.RateGroupMemberOut[3] -> CdhCore.tlmSend.Run
-      rateGroup1Hz.RateGroupMemberOut[4] -> watchdog.run
+      #rateGroup1Hz.RateGroupMemberOut[4] -> watchdog.run
       rateGroup1Hz.RateGroupMemberOut[5] -> imuManager.run
       rateGroup1Hz.RateGroupMemberOut[6] -> comDelay.run
       rateGroup1Hz.RateGroupMemberOut[7] -> burnwire.schedIn
@@ -171,13 +174,14 @@ module ReferenceDeployment {
       rateGroup1Hz.RateGroupMemberOut[10] -> FileHandling.fileDownlink.Run
       rateGroup1Hz.RateGroupMemberOut[11] -> startupManager.run
       rateGroup1Hz.RateGroupMemberOut[12] -> powerMonitor.run
+      rateGroup1Hz.RateGroupMemberOut[13] -> watchdogKai.run
 
     }
 
 
-    connections Watchdog {
-      watchdog.gpioSet -> gpioWatchdog.gpioWrite
-    }
+   # connections Watchdog {
+    #  watchdog.gpioSet -> gpioWatchdog.gpioWrite
+    #}
 
     connections LoadSwitches {
       face4LoadSwitch.gpioSet -> gpioface4LS.gpioWrite
@@ -226,6 +230,13 @@ module ReferenceDeployment {
       powerMonitor.solCurrentGet -> ina219SolManager.currentGet
       powerMonitor.solPowerGet -> ina219SolManager.powerGet
     }
+
+      connections WatchdogKai {      
+      # Connect to GPIO (same pattern as other GPIO components)
+      watchdogKai.gpioWrite -> gpioWatchdog.gpioWrite
+    }
+
+
 
   }
 }
