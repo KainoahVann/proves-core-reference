@@ -26,5 +26,16 @@
 			input-enable;
 		}
 	}
-	
+	watchdog_default: watchdog_default {
+        group1 {
+            pinmux = <GPIO19>;
+            output-enable;
+        };
+    };
+    gps_control_default: gps_control_default {
+        group1 {
+            pinmux = <GPIO11>, <GPIO12>, <GPIO13>;
+            output-enable;
+        };
+    };
 };
