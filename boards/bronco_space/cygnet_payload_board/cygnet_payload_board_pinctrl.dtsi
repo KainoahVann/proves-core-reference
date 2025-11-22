@@ -18,13 +18,24 @@
 		group1{
 			pinmux = <UART0_TX_P0>, <UART0_RX_P1>;
 			input-enable;
-		}
-	}
+		};
+	};
 	uart1_default: uart1_default{
 		group1{
 			pinmux = <UART1_TX_P8>, <UART1_RX_P9>;
 			input-enable;
-		}
-	}
-	
+		};
+	};
+	watchdog_default: watchdog_default {
+        group1 {
+            pinmux = <19>;
+            //output-enable;
+        };
+    };
+    gps_control_default: gps_control_default {
+        group1 {
+            pinmux = <11>, <12>, <13>;
+            //output-enable;
+        };
+    };
 };

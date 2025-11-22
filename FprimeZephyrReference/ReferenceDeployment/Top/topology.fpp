@@ -68,7 +68,7 @@ module ReferenceDeployment {
     instance ina219SolManager
     instance resetManager
 
-     instance watchdogKai
+    instance watchdogKai
 
 
 
