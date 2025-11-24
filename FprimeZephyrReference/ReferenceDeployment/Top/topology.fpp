@@ -22,7 +22,7 @@ module ReferenceDeployment {
   # ----------------------------------------------------------------------
   # Instances used in the topology
   # ----------------------------------------------------------------------
-    instance led
+    #instance led
     
     instance rateGroup10Hz
     instance rateGroup1Hz

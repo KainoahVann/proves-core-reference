@@ -47,10 +47,10 @@ module ReferenceDeployment {
     stack size Default.STACK_SIZE \
     priority 14
 
-  instance led: Components.Led base id 0x10005000 \
-    queue size Default.QUEUE_SIZE \
-    stack size Default.STACK_SIZE \
-    priority 95
+  #instance led: Components.Led base id 0x10005000 \
+  #  queue size Default.QUEUE_SIZE \
+  #  stack size Default.STACK_SIZE \
+  #  priority 95
 
   # ----------------------------------------------------------------------
   # Queued component instances

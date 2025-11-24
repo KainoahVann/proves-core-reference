@@ -3,7 +3,7 @@
 #include <zephyr/dt-bindings/i2c/i2c.h>
 #include <zephyr/dt-bindings/pwm/pwm.h>
 
-#include "proves_flight_control_board_v5-pinctrl.dtsi"
+#include "cygnet-payload-board-pinctrl.dtsi"
 
 / {
 	chosen {
@@ -45,7 +45,16 @@
 			label = "burnwire 1";
 		};
 	}; 
+
+	watchdog_gpio: watchdog_gpio {
+		compatible = "gpio-leds";
+		gpios = <&gpio0 19 GPIO_ACTIVE_HIGH>;
+		label = "WATCHDOG_GPIO";
+	};
 };
+
+
+
 
 zephyr_udc0: &usbd {
 	status = "okay";
