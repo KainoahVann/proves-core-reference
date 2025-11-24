@@ -83,7 +83,7 @@ zephyr_udc0: &usbd {
 		* image definition.
 		*/
 		code_partition: partition@100 {
-			label = "code-partition";
+			label = "code_partition";
 			reg = <0x100 (DT_SIZE_M(4) - 0x100)>;
 			read-only;
 		};

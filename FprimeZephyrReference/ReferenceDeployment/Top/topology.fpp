@@ -60,7 +60,7 @@ module ReferenceDeployment {
     instance face5LoadSwitch
     instance payloadPowerLoadSwitch
     instance payloadBatteryLoadSwitch
-    instance fsSpace
+    # instance fsSpace
     instance cmdSeq
     instance startupManager
     instance powerMonitor
@@ -170,7 +170,7 @@ module ReferenceDeployment {
       rateGroup1Hz.RateGroupMemberOut[6] -> comDelay.run
       rateGroup1Hz.RateGroupMemberOut[7] -> burnwire.schedIn
       rateGroup1Hz.RateGroupMemberOut[8] -> antennaDeployer.schedIn
-      rateGroup1Hz.RateGroupMemberOut[9] -> fsSpace.run
+      # rateGroup1Hz.RateGroupMemberOut[9] -> fsSpace.run
       rateGroup1Hz.RateGroupMemberOut[10] -> FileHandling.fileDownlink.Run
       rateGroup1Hz.RateGroupMemberOut[11] -> startupManager.run
       rateGroup1Hz.RateGroupMemberOut[12] -> powerMonitor.run

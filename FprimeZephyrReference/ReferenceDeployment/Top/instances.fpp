@@ -109,7 +109,7 @@ module ReferenceDeployment {
 
   instance gpioPayloadBatteryLS: Zephyr.ZephyrGpioDriver base id 0x10031000
 
-  instance fsSpace: Components.FsSpace base id 0x10032000
+  # instance fsSpace: Components.FsSpace base id 0x10032000
 
   instance face4LoadSwitch: Components.LoadSwitch base id 0x10033000
 
