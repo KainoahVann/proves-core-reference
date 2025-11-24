@@ -1,7 +1,6 @@
 #include <zephyr/dt-bindings/pinctrl/rpi-pico-rp2350a-pinctrl.h>
 
 &pinctrl {
-
 	i2c0_default: i2c0_default {
 		group1 {
 			pinmux = <I2C0_SCL_P21>, <I2C0_SDA_P20>;
@@ -24,18 +23,16 @@
 		group1{
 			pinmux = <UART1_TX_P8>, <UART1_RX_P9>;
 			input-enable;
-		}
-	}
+		};
+	};
 	watchdog_default: watchdog_default {
         group1 {
-            pinmux = <GPIO19>;
-            output-enable;
+            pinmux = <19>;
         };
     };
     gps_control_default: gps_control_default {
         group1 {
-            pinmux = <GPIO11>, <GPIO12>, <GPIO13>;
-            output-enable;
+            pinmux = <11>, <12>, <13>;
         };
     };
 };

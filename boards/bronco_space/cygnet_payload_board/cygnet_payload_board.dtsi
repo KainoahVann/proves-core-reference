@@ -36,26 +36,8 @@
 			gpios = <&gpio0 19 GPIO_ACTIVE_HIGH>;
 			label = "Watchdog LED";
 		};
-    /*
-		burnwire0: burnwire0{
-			gpios = <&gpio0 28 GPIO_ACTIVE_HIGH>;
-			label = "burnwire 0";
-		};
-		burnwire1: burnwire1{
-			gpios = <&gpio0 29 GPIO_ACTIVE_HIGH>;
-			label = "burnwire 1";
-		};
 	}; 
-
-	watchdog_gpio: watchdog_gpio {
-		compatible = "gpio-leds";
-		gpios = <&gpio0 19 GPIO_ACTIVE_HIGH>;
-		label = "WATCHDOG_GPIO";
-	};
 };
-
-
-
 
 zephyr_udc0: &usbd {
 	status = "okay";
@@ -192,7 +174,7 @@ zephyr_udc0: &usbd {
 		 * 13: FACE5_ENABLE (GPB5)
 		 * 14: READONLY (GPB6)
 		 * 15: CHARGE (GPB7)
-		*/
+		 */
 		gpio-line-names = "ENABLE_HEATER", "PAYLOAD_PWR_ENABLE", "FIRE_DEPLOY2_B", "PAYLOAD_BATT_ENABLE",
 						  "RF2_IO2", "RF2_IO1", "RF2_IO0", "RF2_IO3",
 						  "FACE4_ENABLE", "FACE0_ENABLE", "FACE1_ENABLE", "FACE2_ENABLE",
@@ -209,199 +191,96 @@ zephyr_udc0: &usbd {
     compatible = "gpio-leds";  // Using gpio-leds as a convenient container
 
     enable_heater: enable-heater {
-
-          gpios = <&mcp23017 0 GPIO_ACTIVE_HIGH>;  // GPA0
-          label = "ENABLE_HEATER";
+        gpios = <&mcp23017 0 GPIO_ACTIVE_HIGH>;  // GPA0
+        label = "ENABLE_HEATER";
     };
     
     payload_pwr_enable: payload-pwr-enable {
+        gpios = <&mcp23017 1 GPIO_ACTIVE_HIGH>;  // GPA1
+        label = "PAYLOAD_PWR_ENABLE";
+    };
     
-          gpios = <&mcp23017 1 GPIO_ACTIVE_HIGH>;  // GPA1
-          label = "PAYLOAD_PWR_ENABLE";
-      };
-    
-      fire_deploy2_b: fire-deploy2-b {
-    
+    fire_deploy2_b: fire-deploy2-b {
         gpios = <&mcp23017 2 GPIO_ACTIVE_HIGH>;  // GPA2
         label = "FIRE_DEPLOY2_B";
-      };
+    };
     
-      payload_batt_enable: payload-batt-enable {
-    
-          gpios = <&mcp23017 3 GPIO_ACTIVE_HIGH>;  // GPA3
-          label = "PAYLOAD_BATT_ENABLE";
-      };
+    payload_batt_enable: payload-batt-enable {
+        gpios = <&mcp23017 3 GPIO_ACTIVE_HIGH>;  // GPA3
+        label = "PAYLOAD_BATT_ENABLE";
+    };
 
     rf2_io2: rf2-io2 {
-
-          gpios = <&mcp23017 4 GPIO_ACTIVE_HIGH>;  // GPA4
-          label = "RF2_IO2";
-      };
-
-      rf2_io1: rf2-io1 {
-
-          gpios = <&mcp23017 5 GPIO_ACTIVE_HIGH>;  // GPA5
-          label = "RF2_IO1";
-      };
-
-      rf2_io0: rf2-io0 {
-
-          gpios = <&mcp23017 6 GPIO_ACTIVE_HIGH>;  // GPA6
-          label = "RF2_IO0";
-      };
-
-      rf2_io3: rf2-io3 {
-
-          gpios = <&mcp23017 7 GPIO_ACTIVE_HIGH>;  // GPA7
-          label = "RF2_IO3";
-      };
-
-      face4_enable: face4-enable {
-
-          gpios = <&mcp23017 8 GPIO_ACTIVE_HIGH>;  // GPB0
-          label = "FACE4_ENABLE";
-      };
-
-      face0_enable: face0-enable {
-
-          gpios = <&mcp23017 9 GPIO_ACTIVE_HIGH>;  // GPB1
-          label = "FACE0_ENABLE";
-      };
-
-      face1_enable: face1-enable {
-
-          gpios = <&mcp23017 10 GPIO_ACTIVE_HIGH>;  // GPB2
-          label = "FACE1_ENABLE";
-      };
-
-      face2_enable: face2-enable {
-
-          gpios = <&mcp23017 11 GPIO_ACTIVE_HIGH>;  // GPB3
-          label = "FACE2_ENABLE";
-      };
-
-      face3_enable: face3-enable {
-
-          gpios = <&mcp23017 12 GPIO_ACTIVE_HIGH>;  // GPB4
-          label = "FACE3_ENABLE";
-      };
-
-      face5_enable: face5-enable {
-
-          gpios = <&mcp23017 13 GPIO_ACTIVE_HIGH>;  // GPB5
-          label = "FACE5_ENABLE";
-      };
-
-  };
-
-	rf2_io2: rf2-io2 {
-
         gpios = <&mcp23017 4 GPIO_ACTIVE_HIGH>;  // GPA4
         label = "RF2_IO2";
     };
 
     rf2_io1: rf2-io1 {
-
         gpios = <&mcp23017 5 GPIO_ACTIVE_HIGH>;  // GPA5
         label = "RF2_IO1";
     };
 
     rf2_io0: rf2-io0 {
-
         gpios = <&mcp23017 6 GPIO_ACTIVE_HIGH>;  // GPA6
         label = "RF2_IO0";
     };
 
     rf2_io3: rf2-io3 {
-
         gpios = <&mcp23017 7 GPIO_ACTIVE_HIGH>;  // GPA7
         label = "RF2_IO3";
     };
 
     face4_enable: face4-enable {
-
         gpios = <&mcp23017 8 GPIO_ACTIVE_HIGH>;  // GPB0
         label = "FACE4_ENABLE";
     };
 
     face0_enable: face0-enable {
-
         gpios = <&mcp23017 9 GPIO_ACTIVE_HIGH>;  // GPB1
         label = "FACE0_ENABLE";
     };
 
     face1_enable: face1-enable {
-
         gpios = <&mcp23017 10 GPIO_ACTIVE_HIGH>;  // GPB2
         label = "FACE1_ENABLE";
     };
 
     face2_enable: face2-enable {
-
         gpios = <&mcp23017 11 GPIO_ACTIVE_HIGH>;  // GPB3
         label = "FACE2_ENABLE";
     };
 
     face3_enable: face3-enable {
-
         gpios = <&mcp23017 12 GPIO_ACTIVE_HIGH>;  // GPB4
         label = "FACE3_ENABLE";
     };
 
     face5_enable: face5-enable {
-
         gpios = <&mcp23017 13 GPIO_ACTIVE_HIGH>;  // GPB5
         label = "FACE5_ENABLE";
     };
-
-    enable_heater: enable-heater {
-
-        gpios = <&mcp23017 0 GPIO_ACTIVE_HIGH>;  // GPA0
-        label = "ENABLE_Heater";
-    };
-
-    payload_pwr_enable: payload-pwr-enable {
-
-        gpios = <&mcp23017 1 GPIO_ACTIVE_HIGH>;  // GPA1
-        label = "PAYLOAD_PWR_ENABLE";
-    };
-
-    fire_deploy2_b: fire-deploy2-b {
-
-        gpios = <&mcp23017 2 GPIO_ACTIVE_HIGH>;  // GPA2
-        label = "FIRE_DEPLOY2_B";
-    };
-
-    payload_batt_enable: payload-batt-enable {
-
-        gpios = <&mcp23017 3 GPIO_ACTIVE_HIGH>;  // GPA3
-        label = "PAYLOAD_BATT_ENABLE";
-    };
-};
+  };
 
     // Define GPIO inputs
-gpio_inputs {
+  gpio_inputs {
     compatible = "gpio-keys";
 
-	charge: charge {
-
+    charge: charge {
         gpios = <&mcp23017 16 GPIO_ACTIVE_HIGH>;  // GPB7
         label = "CHARGE";
     };
 
     readonly: readonly {
-
         gpios = <&mcp23017 15 GPIO_ACTIVE_HIGH>;  // GPB6
         label = "READONLY";
     };
+  };
 };
 
 //RP2350 pinctrl with multi-line formatting 
 &pinctrl {
-
 	i2c0_default: i2c0_default {
 	    group1 {
-	
 	        pinmux = <I2C0_SCL_P21>, <I2C0_SDA_P20>;
 	        input-enable;
 	    };
@@ -409,7 +288,6 @@ gpio_inputs {
 	
 	i2c1_default: i2c1_default {
         group1 {
-	
 	        pinmux = <I2C1_SCL_P23>, <I2C1_SDA_P22>;
 	        input-enable;
 	    };
@@ -417,15 +295,13 @@ gpio_inputs {
 	
 	uart0_default: uart0_default {
         group1 {
-	
 	        pinmux = <UART0_TX_P0>, <UART0_RX_P1>;
 	        input-enable;
 	    };
     };
 	
-	 uart1_default: uart1_default {
+	uart1_default: uart1_default {
         group1 {
-	
 	        pinmux = <UART1_TX_P8>, <UART1_RX_P9>;
 	        input-enable;
 	    };
@@ -433,17 +309,13 @@ gpio_inputs {
 	
 	watchdog_default: watchdog_default {
         group1 {
-	
-	        pinmux = <GPIO19>;
-	        output-enable;
+	        pinmux = <19>;
 	    };
     };
 	
 	gps_control_default: gps_control_default {
         group1 {
-	
-	        pinmux = <GPIO11>, <GPIO12>, <GPIO13>;
-		    output-enable;
+	        pinmux = <11>, <12>, <13>;
 	    };
  	};
 };
