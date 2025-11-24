@@ -1,0 +1,6 @@
+board:
+  name: cygnet_payload_board
+  full_name: Cynet payload board
+  vendor: Bronco Space
+  socs:
+  - name: rp2350a

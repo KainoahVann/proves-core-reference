@@ -38,8 +38,8 @@ telemetry packets ReferenceDeploymentPackets {
     CdhCore.version.FrameworkVersion
     CdhCore.version.ProjectVersion
     CdhCore.version.LibraryVersion01
-    fsSpace.FreeSpace
-    fsSpace.TotalSpace
+    # fsSpace.FreeSpace
+    # fsSpace.TotalSpace
   }
 
   

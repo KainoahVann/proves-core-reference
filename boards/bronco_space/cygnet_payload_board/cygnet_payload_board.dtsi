@@ -3,7 +3,7 @@
 #include <zephyr/dt-bindings/i2c/i2c.h>
 #include <zephyr/dt-bindings/pwm/pwm.h>
 
-#include "cygnet-payload-board-pinctrl.dtsi"
+#include "cygnet_payload_board_pinctrl.dtsi"
 
 / {
 	chosen {
@@ -33,9 +33,10 @@
 	leds {
 		compatible = "gpio-leds";
 		led0: led0 {
-			gpios = <&gpio0 23 GPIO_ACTIVE_HIGH>;
+			gpios = <&gpio0 19 GPIO_ACTIVE_HIGH>;
 			label = "Watchdog LED";
 		};
+    /*
 		burnwire0: burnwire0{
 			gpios = <&gpio0 28 GPIO_ACTIVE_HIGH>;
 			label = "burnwire 0";
@@ -91,7 +92,7 @@ zephyr_udc0: &usbd {
 		* image definition.
 		*/
 		code_partition: partition@100 {
-			label = "code-partition";
+			label = "code_partition";
 			reg = <0x100 (DT_SIZE_M(4) - 0x100)>;
 			read-only;
 		};
@@ -191,7 +192,7 @@ zephyr_udc0: &usbd {
 		 * 13: FACE5_ENABLE (GPB5)
 		 * 14: READONLY (GPB6)
 		 * 15: CHARGE (GPB7)
-		 */
+		*/
 		gpio-line-names = "ENABLE_HEATER", "PAYLOAD_PWR_ENABLE", "FIRE_DEPLOY2_B", "PAYLOAD_BATT_ENABLE",
 						  "RF2_IO2", "RF2_IO1", "RF2_IO0", "RF2_IO3",
 						  "FACE4_ENABLE", "FACE0_ENABLE", "FACE1_ENABLE", "FACE2_ENABLE",
@@ -202,34 +203,96 @@ zephyr_udc0: &usbd {
 
 
 // GPIO Expander IO
-
-// Define the GPIO outputs based on your schematic
-gpio_outputs {
+/ {
+  // Define the GPIO outputs based on your schematic
+  gpio_outputs {
     compatible = "gpio-leds";  // Using gpio-leds as a convenient container
 
-	enable_heater: enable-heater {
+    enable_heater: enable-heater {
 
-        gpios = <&mcp23017 0 GPIO_ACTIVE_HIGH>;  // GPA0
-        label = "ENABLE_HEATER";
-	};
-	
-	payload_pwr_enable: payload-pwr-enable {
-	
-        gpios = <&mcp23017 1 GPIO_ACTIVE_HIGH>;  // GPA1
-        label = "PAYLOAD_PWR_ENABLE";
+          gpios = <&mcp23017 0 GPIO_ACTIVE_HIGH>;  // GPA0
+          label = "ENABLE_HEATER";
     };
-	
-    fire_deploy2_b: fire-deploy2-b {
-	
-	    gpios = <&mcp23017 2 GPIO_ACTIVE_HIGH>;  // GPA2
-	    label = "FIRE_DEPLOY2_B";
-    };
-	
-	payload_batt_enable: payload-batt-enable {
-	
-        gpios = <&mcp23017 3 GPIO_ACTIVE_HIGH>;  // GPA3
-        label = "PAYLOAD_BATT_ENABLE";
-    };
+    
+    payload_pwr_enable: payload-pwr-enable {
+    
+          gpios = <&mcp23017 1 GPIO_ACTIVE_HIGH>;  // GPA1
+          label = "PAYLOAD_PWR_ENABLE";
+      };
+    
+      fire_deploy2_b: fire-deploy2-b {
+    
+        gpios = <&mcp23017 2 GPIO_ACTIVE_HIGH>;  // GPA2
+        label = "FIRE_DEPLOY2_B";
+      };
+    
+      payload_batt_enable: payload-batt-enable {
+    
+          gpios = <&mcp23017 3 GPIO_ACTIVE_HIGH>;  // GPA3
+          label = "PAYLOAD_BATT_ENABLE";
+      };
+
+    rf2_io2: rf2-io2 {
+
+          gpios = <&mcp23017 4 GPIO_ACTIVE_HIGH>;  // GPA4
+          label = "RF2_IO2";
+      };
+
+      rf2_io1: rf2-io1 {
+
+          gpios = <&mcp23017 5 GPIO_ACTIVE_HIGH>;  // GPA5
+          label = "RF2_IO1";
+      };
+
+      rf2_io0: rf2-io0 {
+
+          gpios = <&mcp23017 6 GPIO_ACTIVE_HIGH>;  // GPA6
+          label = "RF2_IO0";
+      };
+
+      rf2_io3: rf2-io3 {
+
+          gpios = <&mcp23017 7 GPIO_ACTIVE_HIGH>;  // GPA7
+          label = "RF2_IO3";
+      };
+
+      face4_enable: face4-enable {
+
+          gpios = <&mcp23017 8 GPIO_ACTIVE_HIGH>;  // GPB0
+          label = "FACE4_ENABLE";
+      };
+
+      face0_enable: face0-enable {
+
+          gpios = <&mcp23017 9 GPIO_ACTIVE_HIGH>;  // GPB1
+          label = "FACE0_ENABLE";
+      };
+
+      face1_enable: face1-enable {
+
+          gpios = <&mcp23017 10 GPIO_ACTIVE_HIGH>;  // GPB2
+          label = "FACE1_ENABLE";
+      };
+
+      face2_enable: face2-enable {
+
+          gpios = <&mcp23017 11 GPIO_ACTIVE_HIGH>;  // GPB3
+          label = "FACE2_ENABLE";
+      };
+
+      face3_enable: face3-enable {
+
+          gpios = <&mcp23017 12 GPIO_ACTIVE_HIGH>;  // GPB4
+          label = "FACE3_ENABLE";
+      };
+
+      face5_enable: face5-enable {
+
+          gpios = <&mcp23017 13 GPIO_ACTIVE_HIGH>;  // GPB5
+          label = "FACE5_ENABLE";
+      };
+
+  };
 
 	rf2_io2: rf2-io2 {
 
