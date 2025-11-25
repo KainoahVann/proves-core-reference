@@ -28,16 +28,16 @@ module ReferenceDeployment {
     instance timer
     instance lora
     instance gpioWatchdog
-    instance gpioBurnwire0
-    instance gpioBurnwire1
-    instance gpioface0LS
-    instance gpioface1LS
-    instance gpioface2LS
-    instance gpioface3LS
-    instance gpioface4LS
-    instance gpioface5LS
-    instance gpioPayloadPowerLS
-    instance gpioPayloadBatteryLS
+    #instance gpioBurnwire0
+    #instance gpioBurnwire1
+    #instance gpioface0LS
+    #instance gpioface1LS
+    #instance gpioface2LS
+    #instance gpioface3LS
+    #instance gpioface4LS
+    #instance gpioface5LS
+    #instance gpioPayloadPowerLS
+    #instance gpioPayloadBatteryLS
     instance watchdog
     instance rtcManager
     instance imuManager
@@ -181,21 +181,21 @@ module ReferenceDeployment {
       watchdog.gpioSet -> gpioWatchdog.gpioWrite
     }
 
-    connections LoadSwitches {
-      face4LoadSwitch.gpioSet -> gpioface4LS.gpioWrite
-      face0LoadSwitch.gpioSet -> gpioface0LS.gpioWrite
-      face1LoadSwitch.gpioSet -> gpioface1LS.gpioWrite
-      face2LoadSwitch.gpioSet -> gpioface2LS.gpioWrite
-      face3LoadSwitch.gpioSet -> gpioface3LS.gpioWrite
-      face5LoadSwitch.gpioSet -> gpioface5LS.gpioWrite
-      payloadPowerLoadSwitch.gpioSet -> gpioPayloadPowerLS.gpioWrite
-      payloadBatteryLoadSwitch.gpioSet -> gpioPayloadBatteryLS.gpioWrite
-    }
+    #connections LoadSwitches {
+    #face4LoadSwitch.gpioSet -> gpioface4LS.gpioWrite
+    #  face0LoadSwitch.gpioSet -> gpioface0LS.gpioWrite
+    #  face1LoadSwitch.gpioSet -> gpioface1LS.gpioWrite
+    #  face2LoadSwitch.gpioSet -> gpioface2LS.gpioWrite
+    #  face3LoadSwitch.gpioSet -> gpioface3LS.gpioWrite
+    #  face5LoadSwitch.gpioSet -> gpioface5LS.gpioWrite
+    #  payloadPowerLoadSwitch.gpioSet -> gpioPayloadPowerLS.gpioWrite
+    #  payloadBatteryLoadSwitch.gpioSet -> gpioPayloadBatteryLS.gpioWrite
+    #}
 
-    connections BurnwireGpio {
-      burnwire.gpioSet[0] -> gpioBurnwire0.gpioWrite
-      burnwire.gpioSet[1] -> gpioBurnwire1.gpioWrite
-    }
+    #connections BurnwireGpio {
+    #  burnwire.gpioSet[0] -> gpioBurnwire0.gpioWrite
+    #  burnwire.gpioSet[1] -> gpioBurnwire1.gpioWrite
+    #}
 
     connections AntennaDeployment {
       antennaDeployer.burnStart -> burnwire.burnStart
