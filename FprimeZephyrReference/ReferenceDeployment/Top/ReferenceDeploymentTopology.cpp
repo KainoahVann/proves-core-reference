@@ -14,7 +14,7 @@
 #include <zephyr/drivers/gpio.h>
 
 static const struct gpio_dt_spec ledGpio = GPIO_DT_SPEC_GET(DT_NODELABEL(led0), gpios);
-static const struct gpio_dt_spec burnwire0Gpio = GPIO_DT_SPEC_GET(DT_NODELABEL(burnwire0), gpios);
+/*static const struct gpio_dt_spec burnwire0Gpio = GPIO_DT_SPEC_GET(DT_NODELABEL(burnwire0), gpios);
 static const struct gpio_dt_spec burnwire1Gpio = GPIO_DT_SPEC_GET(DT_NODELABEL(burnwire1), gpios);
 static const struct gpio_dt_spec face0LoadSwitchGpio = GPIO_DT_SPEC_GET(DT_NODELABEL(face0_enable), gpios);
 static const struct gpio_dt_spec face1LoadSwitchGpio = GPIO_DT_SPEC_GET(DT_NODELABEL(face1_enable), gpios);
@@ -24,7 +24,7 @@ static const struct gpio_dt_spec face4LoadSwitchGpio = GPIO_DT_SPEC_GET(DT_NODEL
 static const struct gpio_dt_spec face5LoadSwitchGpio = GPIO_DT_SPEC_GET(DT_NODELABEL(face5_enable), gpios);
 static const struct gpio_dt_spec payloadPowerLoadSwitchGpio = GPIO_DT_SPEC_GET(DT_NODELABEL(payload_pwr_enable), gpios);
 static const struct gpio_dt_spec payloadBatteryLoadSwitchGpio =
-    GPIO_DT_SPEC_GET(DT_NODELABEL(payload_batt_enable), gpios);
+    GPIO_DT_SPEC_GET(DT_NODELABEL(payload_batt_enable), gpios);*/
 
 // Allows easy reference to objects in FPP/autocoder required namespaces
 using namespace ReferenceDeployment;
@@ -67,10 +67,11 @@ void configureTopology() {
     rateGroup1Hz.configure(rateGroup1HzContext, FW_NUM_ARRAY_ELEMENTS(rateGroup1HzContext));
 
     gpioWatchdog.open(ledGpio, Zephyr::ZephyrGpioDriver::GpioConfiguration::OUT);
-    gpioBurnwire0.open(burnwire0Gpio, Zephyr::ZephyrGpioDriver::GpioConfiguration::OUT);
-    gpioBurnwire1.open(burnwire1Gpio, Zephyr::ZephyrGpioDriver::GpioConfiguration::OUT);
+    //gpioBurnwire0.open(burnwire0Gpio, Zephyr::ZephyrGpioDriver::GpioConfiguration::OUT);
+    //gpioBurnwire1.open(burnwire1Gpio, Zephyr::ZephyrGpioDriver::GpioConfiguration::OUT);
 
     cmdSeq.allocateBuffer(0, mallocator, 5 * 1024);
+    /*
     gpioface4LS.open(face4LoadSwitchGpio, Zephyr::ZephyrGpioDriver::GpioConfiguration::OUT);
     gpioface0LS.open(face0LoadSwitchGpio, Zephyr::ZephyrGpioDriver::GpioConfiguration::OUT);
     gpioface1LS.open(face1LoadSwitchGpio, Zephyr::ZephyrGpioDriver::GpioConfiguration::OUT);
@@ -79,6 +80,7 @@ void configureTopology() {
     gpioface5LS.open(face5LoadSwitchGpio, Zephyr::ZephyrGpioDriver::GpioConfiguration::OUT);
     gpioPayloadPowerLS.open(payloadPowerLoadSwitchGpio, Zephyr::ZephyrGpioDriver::GpioConfiguration::OUT);
     gpioPayloadBatteryLS.open(payloadBatteryLoadSwitchGpio, Zephyr::ZephyrGpioDriver::GpioConfiguration::OUT);
+    */
 }
 
 // Public functions for use in main program are namespaced with deployment name ReferenceDeployment
@@ -108,13 +110,15 @@ void setupTopology(const TopologyState& state) {
 
     // We have a pipeline for both the LoRa and UART drive to allow for ground harness debugging an
     // for over-the-air communications.
-    lora.start(state.loraDevice, Zephyr::TransmitState::DISABLED);
+    comDriver.configure(state.uartDevice, state.baudRate);
+    /*lora.start(state.loraDevice, Zephyr::TransmitState::DISABLED);
     comDriver.configure(state.uartDevice, state.baudRate);
 
     lsm6dsoManager.configure(state.lsm6dsoDevice);
     lis2mdlManager.configure(state.lis2mdlDevice);
     ina219SysManager.configure(state.ina219SysDevice);
     ina219SolManager.configure(state.ina219SolDevice);
+    */
 }
 
 void startRateGroups() {
