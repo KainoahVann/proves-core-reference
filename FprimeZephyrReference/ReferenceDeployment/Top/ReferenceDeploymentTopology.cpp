@@ -110,6 +110,7 @@ void setupTopology(const TopologyState& state) {
 
     // We have a pipeline for both the LoRa and UART drive to allow for ground harness debugging an
     // for over-the-air communications.
+    comDriver.configure(state.uartDevice, state.baudRate);
     /*lora.start(state.loraDevice, Zephyr::TransmitState::DISABLED);
     comDriver.configure(state.uartDevice, state.baudRate);
 
