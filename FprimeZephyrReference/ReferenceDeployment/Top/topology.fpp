@@ -69,6 +69,12 @@ module ReferenceDeployment {
     instance resetManager
     instance modeManager
 
+    #instance RADFETHandler
+
+    
+
+  
+
 
   # ----------------------------------------------------------------------
   # Pattern graph specifiers
@@ -256,6 +262,26 @@ module ReferenceDeployment {
       modeManager.loadSwitchTurnOff[6] -> payloadPowerLoadSwitch.turnOff
       modeManager.loadSwitchTurnOff[7] -> payloadBatteryLoadSwitch.turnOff
     }
+
+
+
+    #connections RADFETHandler {
+    # Connect to PayloadCom for UART communication
+    #RADFETHandler.commandOut -> payloadCom.commandIn
+    #payloadCom.uartDataOut -> radfetHandler.dataIn
+    
+    # Add to rate group for periodic scheduling
+    #rateGroup10Hz.RateGroupMemberOut[5] -> radfetHandler.schedIn
+    
+    # Standard F' connections
+    #RADFETHandler.timeCaller -> rtcManager.timeGetPort
+    #RADFETHandler.cmdRegOut -> CdhCore.cmdDisp.compCmdReg
+    #RADFETHandler.cmdResponseOut -> CdhCore.cmdDisp.compCmdStat
+    #CdhCore.cmdDisp.compCmdSend -> RADFETHandler.cmdIn
+    #RADFETHandler.eventOut -> CdhCore.events.log
+    #RADFETHandler.textEventOut -> CdhCore.textLogger.textLog
+    #RADFETHandler.tlmOut -> CdhCore.tlmSend.tlm
+#}
 
   }
 }
