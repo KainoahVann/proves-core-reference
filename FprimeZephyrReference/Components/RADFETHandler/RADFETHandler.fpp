@@ -1,4 +1,4 @@
-module FprimeZephyrReference {
+module Components {
     passive component RADFETHandler {
 
         @ Start Radiation Readings

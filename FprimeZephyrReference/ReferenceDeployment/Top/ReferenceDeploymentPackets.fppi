@@ -55,10 +55,6 @@ telemetry packets ReferenceDeploymentPackets {
     ReferenceDeployment.lis2mdlManager.MagneticField
   }
 
-  packet LoRa id 7 group 4 {
-    lora.LastRssi
-    lora.LastSnr
-  }
 
   packet Antenna id 8 group 4 {
     ReferenceDeployment.antennaDeployer.DeployAttemptCount
@@ -85,6 +81,15 @@ telemetry packets ReferenceDeploymentPackets {
     ReferenceDeployment.ina219SolManager.Power
     ReferenceDeployment.powerMonitor.TotalPowerConsumption
     ReferenceDeployment.powerMonitor.TotalPowerGenerated
+  }
+
+  packet radfets id 11 group 4 {
+      ReferenceDeployment.radfetHandler.ReadingsCount
+      ReferenceDeployment.radfetHandler.RawCounts
+      ReferenceDeployment.radfetHandler.RadiationDose
+      ReferenceDeployment.radfetHandler.DoseRate
+      ReferenceDeployment.radfetHandler.SensorStatus
+      ReferenceDeployment.radfetHandler.StorageUsage
   }
 
 } omit {
@@ -122,4 +127,6 @@ telemetry packets ReferenceDeploymentPackets {
   FileHandling.fileManager.Errors
   FileHandling.fileUplink.Warnings
   FileHandling.fileDownlink.Warnings
+  lora.LastRssi
+  lora.LastSnr
 }

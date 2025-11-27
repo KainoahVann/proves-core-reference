@@ -4,7 +4,7 @@
 #include <cstring>
 #include <string>
 
-namespace FprimeZephyrReference {
+namespace Components {
 
 RADFETHandler ::RADFETHandler(const char* const compName) : RADFETHandlerComponentBase(compName),
     m_periodicReadings(false),

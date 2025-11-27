@@ -5,7 +5,7 @@
 #include <Os/File.hpp>
 #include <string>
 
-namespace FprimeZephyrReference {
+namespace Components {
 
 class RADFETHandler : public RADFETHandlerComponentBase {
   public:

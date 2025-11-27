@@ -69,7 +69,7 @@ module ReferenceDeployment {
     instance resetManager
     instance modeManager
 
-    #instance RADFETHandler
+    instance radfetHandler
 
     
 
