@@ -28,16 +28,16 @@ module ReferenceDeployment {
     instance timer
     instance lora
     instance gpioWatchdog
-    #instance gpioBurnwire0
-    #instance gpioBurnwire1
-    #instance gpioface0LS
-    #instance gpioface1LS
-    #instance gpioface2LS
-    #instance gpioface3LS
-    #instance gpioface4LS
-    #instance gpioface5LS
-    #instance gpioPayloadPowerLS
-    #instance gpioPayloadBatteryLS
+    instance gpioBurnwire0
+    instance gpioBurnwire1
+    instance gpioface0LS
+    instance gpioface1LS
+    instance gpioface2LS
+    instance gpioface3LS
+    instance gpioface4LS
+    instance gpioface5LS
+    instance gpioPayloadPowerLS
+    instance gpioPayloadBatteryLS
     instance watchdog
     instance rtcManager
     instance imuManager
@@ -68,6 +68,9 @@ module ReferenceDeployment {
     instance ina219SolManager
     instance resetManager
     instance modeManager
+
+    instance peripheralUartDriver
+    instance payloadBufferManager
 
     instance radfetHandler
 
@@ -160,8 +163,9 @@ module ReferenceDeployment {
       rateGroup10Hz.RateGroupMemberOut[0] -> comDriver.schedIn
       rateGroup10Hz.RateGroupMemberOut[1] -> ComCcsdsUart.aggregator.timeout
       rateGroup10Hz.RateGroupMemberOut[2] -> ComCcsds.aggregator.timeout
-      rateGroup10Hz.RateGroupMemberOut[3] -> FileHandling.fileManager.schedIn
-      rateGroup10Hz.RateGroupMemberOut[4] -> cmdSeq.schedIn
+      rateGroup10Hz.RateGroupMemberOut[3] -> peripheralUartDriver.schedIn
+      rateGroup10Hz.RateGroupMemberOut[4] -> FileHandling.fileManager.schedIn
+      rateGroup10Hz.RateGroupMemberOut[5] -> cmdSeq.schedIn
 
       # Slow rate (1Hz) rate group
       rateGroupDriver.CycleOut[Ports_RateGroups.rateGroup1Hz] -> rateGroup1Hz.CycleIn
@@ -175,10 +179,11 @@ module ReferenceDeployment {
       rateGroup1Hz.RateGroupMemberOut[7] -> burnwire.schedIn
       rateGroup1Hz.RateGroupMemberOut[8] -> antennaDeployer.schedIn
       rateGroup1Hz.RateGroupMemberOut[9] -> fsSpace.run
-      rateGroup1Hz.RateGroupMemberOut[10] -> FileHandling.fileDownlink.Run
-      rateGroup1Hz.RateGroupMemberOut[11] -> startupManager.run
-      rateGroup1Hz.RateGroupMemberOut[12] -> powerMonitor.run
-      rateGroup1Hz.RateGroupMemberOut[13] -> modeManager.run
+      rateGroup1Hz.RateGroupMemberOut[10] -> payloadBufferManager.schedIn
+      rateGroup1Hz.RateGroupMemberOut[11] -> FileHandling.fileDownlink.Run
+      rateGroup1Hz.RateGroupMemberOut[12] -> startupManager.run
+      rateGroup1Hz.RateGroupMemberOut[13] -> powerMonitor.run
+      rateGroup1Hz.RateGroupMemberOut[14] -> modeManager.run
 
     }
 
@@ -187,21 +192,21 @@ module ReferenceDeployment {
       watchdog.gpioSet -> gpioWatchdog.gpioWrite
     }
 
-    #connections LoadSwitches {
-    #face4LoadSwitch.gpioSet -> gpioface4LS.gpioWrite
-    #  face0LoadSwitch.gpioSet -> gpioface0LS.gpioWrite
-    #  face1LoadSwitch.gpioSet -> gpioface1LS.gpioWrite
-    #  face2LoadSwitch.gpioSet -> gpioface2LS.gpioWrite
-    #  face3LoadSwitch.gpioSet -> gpioface3LS.gpioWrite
-    #  face5LoadSwitch.gpioSet -> gpioface5LS.gpioWrite
-    #  payloadPowerLoadSwitch.gpioSet -> gpioPayloadPowerLS.gpioWrite
-    #  payloadBatteryLoadSwitch.gpioSet -> gpioPayloadBatteryLS.gpioWrite
-    #}
+    connections LoadSwitches {
+      face4LoadSwitch.gpioSet -> gpioface4LS.gpioWrite
+      face0LoadSwitch.gpioSet -> gpioface0LS.gpioWrite
+      face1LoadSwitch.gpioSet -> gpioface1LS.gpioWrite
+      face2LoadSwitch.gpioSet -> gpioface2LS.gpioWrite
+      face3LoadSwitch.gpioSet -> gpioface3LS.gpioWrite
+      face5LoadSwitch.gpioSet -> gpioface5LS.gpioWrite
+      payloadPowerLoadSwitch.gpioSet -> gpioPayloadPowerLS.gpioWrite
+      payloadBatteryLoadSwitch.gpioSet -> gpioPayloadBatteryLS.gpioWrite
+    }
 
-    #connections BurnwireGpio {
-    #  burnwire.gpioSet[0] -> gpioBurnwire0.gpioWrite
-    #  burnwire.gpioSet[1] -> gpioBurnwire1.gpioWrite
-    #}
+    connections BurnwireGpio {
+      burnwire.gpioSet[0] -> gpioBurnwire0.gpioWrite
+      burnwire.gpioSet[1] -> gpioBurnwire1.gpioWrite
+    }
 
     connections AntennaDeployment {
       antennaDeployer.burnStart -> burnwire.burnStart
@@ -265,23 +270,23 @@ module ReferenceDeployment {
 
 
 
-    #connections RADFETHandler {
+    connections radfetHandler {
     # Connect to PayloadCom for UART communication
-    #RADFETHandler.commandOut -> payloadCom.commandIn
+    #radfetHandler.commandOut -> payloadCom.commandIn
     #payloadCom.uartDataOut -> radfetHandler.dataIn
     
     # Add to rate group for periodic scheduling
-    #rateGroup10Hz.RateGroupMemberOut[5] -> radfetHandler.schedIn
+    rateGroup10Hz.RateGroupMemberOut[6] -> radfetHandler.schedIn
     
     # Standard F' connections
-    #RADFETHandler.timeCaller -> rtcManager.timeGetPort
-    #RADFETHandler.cmdRegOut -> CdhCore.cmdDisp.compCmdReg
-    #RADFETHandler.cmdResponseOut -> CdhCore.cmdDisp.compCmdStat
-    #CdhCore.cmdDisp.compCmdSend -> RADFETHandler.cmdIn
-    #RADFETHandler.eventOut -> CdhCore.events.log
-    #RADFETHandler.textEventOut -> CdhCore.textLogger.textLog
-    #RADFETHandler.tlmOut -> CdhCore.tlmSend.tlm
-#}
+    #radfetHandler.timeCaller -> rtcManager.timeGetPort
+    #radfetHandler.cmdRegOut -> CdhCore.cmdDisp.compCmdReg
+    #radfetHandler.cmdResponseOut -> CdhCore.cmdDisp.compCmdStat
+    #CdhCore.cmdDisp.compCmdSend -> radfetHandler.cmdIn
+    #radfetHandler.eventOut -> CdhCore.events.log
+    #radfetHandler.textEventOut -> CdhCore.textLogger.textLog
+    #radfetHandler.tlmOut -> CdhCore.tlmSend.tlm
+    }
 
   }
 }

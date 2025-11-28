@@ -84,9 +84,9 @@ module ReferenceDeployment {
 
   instance burnwire: Components.Burnwire base id 0x10021000
 
-  # instance gpioBurnwire0: Zephyr.ZephyrGpioDriver base id 0x10022000
+  instance gpioBurnwire0: Zephyr.ZephyrGpioDriver base id 0x10022000
 
-  # instance gpioBurnwire1: Zephyr.ZephyrGpioDriver base id 0x10023000
+  instance gpioBurnwire1: Zephyr.ZephyrGpioDriver base id 0x10023000
 
   instance comDelay: Components.ComDelay base id 0x10025000
 
@@ -98,21 +98,21 @@ module ReferenceDeployment {
 
   instance antennaDeployer: Components.AntennaDeployer base id 0x10029000
 
-  # instance gpioface4LS: Zephyr.ZephyrGpioDriver base id 0x1002A000
+  instance gpioface4LS: Zephyr.ZephyrGpioDriver base id 0x1002A000
 
-  # instance gpioface0LS: Zephyr.ZephyrGpioDriver base id 0x1002B000
+  instance gpioface0LS: Zephyr.ZephyrGpioDriver base id 0x1002B000
 
-  # instance gpioface1LS: Zephyr.ZephyrGpioDriver base id 0x1002C000
+  instance gpioface1LS: Zephyr.ZephyrGpioDriver base id 0x1002C000
 
-  # instance gpioface2LS: Zephyr.ZephyrGpioDriver base id 0x1002D000
+  instance gpioface2LS: Zephyr.ZephyrGpioDriver base id 0x1002D000
 
-  # instance gpioface3LS: Zephyr.ZephyrGpioDriver base id 0x1002E000
+  instance gpioface3LS: Zephyr.ZephyrGpioDriver base id 0x1002E000
 
-  # instance gpioface5LS: Zephyr.ZephyrGpioDriver base id 0x1002F000
+  instance gpioface5LS: Zephyr.ZephyrGpioDriver base id 0x1002F000
 
-  # instance gpioPayloadPowerLS: Zephyr.ZephyrGpioDriver base id 0x10030000
+  instance gpioPayloadPowerLS: Zephyr.ZephyrGpioDriver base id 0x10030000
 
-  # instance gpioPayloadBatteryLS: Zephyr.ZephyrGpioDriver base id 0x10031000
+  instance gpioPayloadBatteryLS: Zephyr.ZephyrGpioDriver base id 0x10031000
 
   instance fsSpace: Components.FsSpace base id 0x10032000
 
@@ -142,6 +142,30 @@ module ReferenceDeployment {
 
   instance startupManager: Components.StartupManager base id 0x1003F000
 
-  instance radfetHandler: Components.RADFETHandler base id 0x1004A000
+  instance peripheralUartDriver: Zephyr.ZephyrUartDriver base id 0x1004A000
+
+  instance payloadBufferManager: Svc.BufferManager base id 0x1004B000 \
+  {
+    phase Fpp.ToCpp.Phases.configObjects """
+    Svc::BufferManager::BufferBins bins;
+    """
+    phase Fpp.ToCpp.Phases.configComponents """
+    memset(&ConfigObjects::ReferenceDeployment_payloadBufferManager::bins, 0, sizeof(ConfigObjects::ReferenceDeployment_payloadBufferManager::bins));
+    // UART RX buffers for camera data streaming (4 KB, 2 buffers for ping-pong)
+    ConfigObjects::ReferenceDeployment_payloadBufferManager::bins.bins[0].bufferSize = 4 * 1024;
+    ConfigObjects::ReferenceDeployment_payloadBufferManager::bins.bins[0].numBuffers = 2;
+    ReferenceDeployment::payloadBufferManager.setup(
+        1,  // manager ID
+        0,  // store ID
+        ComCcsds::Allocation::memAllocator,  // Reuse existing allocator from ComCcsds subtopology
+        ConfigObjects::ReferenceDeployment_payloadBufferManager::bins
+    );
+    """
+    phase Fpp.ToCpp.Phases.tearDownComponents """
+    ReferenceDeployment::payloadBufferManager.cleanup();
+    """
+  }
+
+  instance radfetHandler: Components.RADFETHandler base id 0x1004C000
 
 }
