@@ -49,6 +49,8 @@ module ReferenceDeployment {
     instance antennaDeployer
     instance comSplitterEvents
     instance comSplitterTelemetry
+
+    
     # For UART sideband communication
     instance comDriver
 
@@ -69,7 +71,7 @@ module ReferenceDeployment {
     instance resetManager
     instance modeManager
 
-
+    instance radfetComponent
   # ----------------------------------------------------------------------
   # Pattern graph specifiers
   # ----------------------------------------------------------------------
@@ -257,5 +259,14 @@ module ReferenceDeployment {
       modeManager.loadSwitchTurnOff[7] -> payloadBatteryLoadSwitch.turnOff
     }
 
+
+     connections RadfetComponent {
+      # GPIO connections for RADFET control
+      radfetComponent.gpioSet -> gpioWatchdog.gpioWrite  # Or create dedicated GPIO instances
+      
+      # Data output to flight computer via UART
+      radfetComponent.dataOut -> comDriver.$send  # This will now work    }
+
   }
+}
 }

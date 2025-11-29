@@ -48,11 +48,18 @@ telemetry packets ReferenceDeploymentPackets {
     ReferenceDeployment.watchdog.WatchdogTransitions
   }
 
-  packet Imu id 6 group 4 {
+  packet radfet id 6 group 4 {
     ReferenceDeployment.lsm6dsoManager.Acceleration
     ReferenceDeployment.lsm6dsoManager.AngularVelocity
     ReferenceDeployment.lsm6dsoManager.Temperature
     ReferenceDeployment.lis2mdlManager.MagneticField
+
+    ReferenceDeployment.radfetComponent.Module1Radfet1Adc
+    ReferenceDeployment.radfetComponent.Module1Radfet2Adc
+    ReferenceDeployment.radfetComponent.Module2Radfet1Adc
+    ReferenceDeployment.radfetComponent.Module2Radfet2Adc
+    ReferenceDeployment.radfetComponent.Module1State
+    ReferenceDeployment.radfetComponent.Module2State
   }
 
   packet LoRa id 7 group 4 {
@@ -86,6 +93,7 @@ telemetry packets ReferenceDeploymentPackets {
     ReferenceDeployment.powerMonitor.TotalPowerConsumption
     ReferenceDeployment.powerMonitor.TotalPowerGenerated
   }
+
 
 } omit {
   CdhCore.cmdDisp.CommandErrors

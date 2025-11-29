@@ -7,14 +7,21 @@ module Components {
         # Commands #
         #----------#
 
-        @start reading
+        @ Start automatic readings from both modules
         sync command START_READINGS()
 
-        @stop reasing
+        @ Stop automatic readings  
         sync command STOP_READINGS()
 
-        @single reading test command
+        @ Take single reading from active modules
         sync command TAKE_READING()
+
+        @ Take reading from specific RADFET (module: 1-2, radfet: 1-2)
+        sync command READ_RADFET(
+            moduleId: U8 @< Module ID (1 or 2)
+            radfetId: U8 @< RADFET ID (1 or 2)
+        )
+
 
         
 
@@ -22,73 +29,69 @@ module Components {
         #  events  #
         #----------#
 
-        @logged when radfets start 
-        event ReadingsStarted() severity activity high format "RADFETs started"
+        @ RADFET readings started
+        event ReadingsStarted() severity activity high format "RADFET readings started"
 
-        @logged when readings stop
-        event ReadingsStopped() severity activity high format "RADFETs stopped"
+        @ RADFET readings stopped
+        event ReadingsStopped() severity activity high format "RADFET readings stopped"
 
-        @logged when single test reading taken
+        @ Single reading taken
         event ReadingTaken(
-            sensor: U8 @< which sensor (1 or 2)
-            adcValue: U16 @< raw value read
-        ) \
-            severity activity high format "RADFET {}, ADC={}"
+            moduleId: U8 @< Which module (1 or 2)
+            radfetId: U8 @< Which RADFET (1 or 2) 
+            adcValue: U16 @< Raw ADC value
+        ) severity activity high format "Module {} RADFET {}: ADC={}"
 
+        @ Module enabled
+        event ModuleEnabled(moduleId: U8) severity activity high format "Module {} enabled"
 
-        @sensor enabled event
-        event SensorEnabled(sensor: U8) severity activity high format "RADFET {} enabled"
-
-        @sensor disabled event
-        event SensorDisabled(sensor: U8) severity activity high format "RADFET {} disabled"
-
-        @data send event
+        @ Module disabled
+        event ModuleDisabled(moduleId: U8) severity activity high format "Module {} disabled"
+       
+        @ Data sent to flight computer
         event DataSent(
-            sensor: U8
-            dataSize: U32
-        ) \ 
-            severity activity high format "RADFET {} data sent {} bytes to fc"
+            moduleId: U8 @< Which module data was from
+            radfetId: U8 @< Which RADFET data was from
+            dataSize: U32 @< Size of data sent in bytes
+        ) severity activity high format "Module {} RADFET {} data sent: {} bytes"
 
-
+       
         #-------------#
         #  telemetry  #
         #-------------#
 
-        #radfet 1
-        @ adc val
-        telemetry RADFET1adc: U16
-        @state
-        telemetry RADFET1state: U8
+         @ Module 1 RADFET 1 ADC value
+        telemetry Module1Radfet1Adc: U16
 
-        #radfet 2 
-        @adc val
-        telemetry RADFET2adc: U16
-        @state 
-        telemetry RADFET2state: U8
+        @ Module 1 RADFET 2 ADC value  
+        telemetry Module1Radfet2Adc: U16
 
+        @ Module 2 RADFET 1 ADC value
+        telemetry Module2Radfet1Adc: U16
 
-        @total readings 
-        telemetry TotalReadings: U32
+        @ Module 2 RADFET 2 ADC value
+        telemetry Module2Radfet2Adc: U16
+
+        @ Module 1 state (0=off, 1=on)
+        telemetry Module1State: U8
+
+        @ Module 2 state (0=off, 1=on)
+        telemetry Module2State: U8
+
 
 
         #-------------#
         #    Ports    #
         #-------------#
 
-        @receiving calls from rate group
+        @ Rate group driver for automatic readings
         sync input port schedIn: Svc.Sched
 
-        @setting GPIO for RADFET control
+        @ GPIO control for RADFETs
         output port gpioSet: Drv.GpioWrite
 
-        @port for adc vals
-        output port adcRead: Fw.BufferSend
-
-        @ port for sending rad data back via UART
-        output port dataOut: Fw.BufferSend
-
-        @ port for storing data to flash
-        output port storeData: Fw.BufferSend
+        @ Send data to FC via UART
+        output port dataOut:Drv.ByteStreamSend
 
 
 

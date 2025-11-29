@@ -142,4 +142,5 @@ module ReferenceDeployment {
 
   instance startupManager: Components.StartupManager base id 0x1003F000
 
+  instance radfetComponent: Components.radfetComponent base id 0x10050000
 }
