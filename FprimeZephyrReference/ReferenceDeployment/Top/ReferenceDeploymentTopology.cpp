@@ -133,6 +133,8 @@ void setupTopology(const TopologyState& state) {
     ina219SysManager.configure(state.ina219SysDevice);
     ina219SolManager.configure(state.ina219SolDevice);
     */
+
+    fcUartDriver.configure(state.fcUart, state.fcUartBaudRate);
 }
 
 void startRateGroups() {

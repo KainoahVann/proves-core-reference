@@ -52,6 +52,10 @@ module ReferenceDeployment {
     stack size Default.STACK_SIZE \
     priority 16
 
+  instance radfetComponent: Components.radfetComponent base id 0x10041000 \
+    queue size Default.QUEUE_SIZE \
+    stack size Default.STACK_SIZE \
+    priority 13
   # ----------------------------------------------------------------------
   # Queued component instances
   # ----------------------------------------------------------------------
@@ -142,7 +146,6 @@ module ReferenceDeployment {
 
   instance startupManager: Components.StartupManager base id 0x1003F000
 
-  instance radfetComponent: Components.radfetComponent base id 0x10041000
 
   instance gpioModule1Enable: Zephyr.ZephyrGpioDriver base id 0x10042000
   instance gpioModule1R1: Zephyr.ZephyrGpioDriver base id 0x10043000
@@ -150,5 +153,29 @@ module ReferenceDeployment {
   instance gpioModule2Enable: Zephyr.ZephyrGpioDriver base id 0x10045000
   instance gpioModule2R1: Zephyr.ZephyrGpioDriver base id 0x10046000
   instance gpioModule2R2: Zephyr.ZephyrGpioDriver base id 0x10047000
+
+  instance fcUartDriver: Zephyr.ZephyrUartDriver base id 0x10048000
+
+  instance fcBufferManager: Svc.BufferManager base id 0x10049000 \
+  {
+    phase Fpp.ToCpp.Phases.configObjects """
+    Svc::BufferManager::BufferBins bins;
+    """
+    phase Fpp.ToCpp.Phases.configComponents """
+    memset(&ConfigObjects::ReferenceDeployment_fcBufferManager::bins, 0, sizeof(ConfigObjects::ReferenceDeployment_fcBufferManager::bins));
+    // UART RX buffers for camera data streaming (4 KB, 2 buffers for ping-pong)
+    ConfigObjects::ReferenceDeployment_fcBufferManager::bins.bins[0].bufferSize = 4 * 1024;
+    ConfigObjects::ReferenceDeployment_fcBufferManager::bins.bins[0].numBuffers = 2;
+    ReferenceDeployment::fcBufferManager.setup(
+        1,  // manager ID
+        0,  // store ID
+        ComCcsds::Allocation::memAllocator,  // Reuse existing allocator from ComCcsds subtopology
+        ConfigObjects::ReferenceDeployment_fcBufferManager::bins
+    );
+    """
+    phase Fpp.ToCpp.Phases.tearDownComponents """
+    ReferenceDeployment::fcBufferManager.cleanup();
+    """
+  }
 
 }

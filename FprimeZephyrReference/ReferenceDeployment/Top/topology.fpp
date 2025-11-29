@@ -39,7 +39,11 @@ module ReferenceDeployment {
     #instance gpioPayloadPowerLS
     #instance gpioPayloadBatteryLS
     instance watchdog
+
+    instance fcUartDriver
+    instance fcBufferManager
     instance radfetComponent
+
     instance gpioModule1Enable
     instance gpioModule1R1
     instance gpioModule1R2
@@ -267,6 +271,12 @@ module ReferenceDeployment {
     connections RadfetSensor {
       # Schedule radfetComponent with 1Hz rate group
       rateGroup1Hz.RateGroupMemberOut[14] -> radfetComponent.schedIn
+
+      #enable radfet through text uart commands from RADFETHandler(fc board)
+      fcUartDriver.$recv -> radfetComponent.commandIn
+      
+      #Buffer return path
+      radfetComponent.bufferReturn -> fcUartDriver.recvReturnIn
       
       # GPIO control for Module 1
       radfetComponent.gpioSet[0] -> gpioModule1Enable.gpioWrite
@@ -279,7 +289,11 @@ module ReferenceDeployment {
       radfetComponent.gpioSet[5] -> gpioModule2R2.gpioWrite
       
       # Send data to flight computer via UART
-      radfetComponent.dataOut -> comDriver.$send
+      radfetComponent.dataOut -> fcUartDriver.$send
+
+      # UART driver allocates/deallocates from BufferManager
+      fcUartDriver.allocate -> fcBufferManager.bufferGetCallee
+      fcUartDriver.deallocate -> fcBufferManager.bufferSendIn
     }
   }
 }

@@ -9,6 +9,8 @@
 #include <zephyr/drivers/adc.h>
 #include <zephyr/kernel.h>
 
+#include <cstring>
+
 // ADC configuration
 #define ADC_NODE DT_NODELABEL(adc)
 #define ADC_RESOLUTION 12
@@ -113,6 +115,36 @@ void radfetComponent::schedIn_handler(FwIndexType portNum, U32 context) {
         m_totalReadings++;
         this->tlmWrite_TotalReadings(m_totalReadings);
     }
+}
+
+void radfetComponent::commandIn_handler(FwIndexType portNum, Fw::Buffer& buffer, const Drv::ByteStreamStatus& status){
+  if(status != Drv::ByteStreamStatus::OP_OK){
+    //return buffer to buffer return to prevent leaks 
+    if(buffer.isValid()){
+      this->bufferReturn_out(0,buffer);
+    }
+
+    return; //exit method due to bad status 
+  }
+
+  //process buffer
+  const char* command = reinterpret_cast<const char*>(buffer.getData());
+  U32 size = buffer.getSize();
+
+  if(size == 7 && strncmp(command,"/start\n",7) ==0){
+    m_reading = true;
+    this->log_ACTIVITY_HI_ReadingsStarted();
+  }else if(size == 6 && strncmp(command,"/stop\n",6)){
+    m_reading = false;
+    
+    // Disable both modules
+    disableModule(1);
+    disableModule(2);
+    
+    this->log_ACTIVITY_HI_ReadingsStopped();
+  }
+
+  this->bufferReturn_out(0,buffer);
 }
 
 // Helper: Enable Module via GPIO

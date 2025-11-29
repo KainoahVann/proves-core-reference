@@ -17,6 +17,7 @@ const struct device* serial = DEVICE_DT_GET(DT_NODELABEL(cdc_acm_uart0));
 //const struct device* lsm6dso = DEVICE_DT_GET(DT_NODELABEL(lsm6dso0));
 //const struct device* lis2mdl = DEVICE_DT_GET(DT_NODELABEL(lis2mdl0));
 //const struct device* rtc = DEVICE_DT_GET(DT_NODELABEL(rtc0));
+const struct device* fc_uart = DEVICE_DT_GET(DT_NODELABEL(uart0));
 
 int main(int argc, char* argv[]) {
     // ** DO NOT REMOVE **//
@@ -35,6 +36,10 @@ int main(int argc, char* argv[]) {
     //inputs.lis2mdlDevice = lis2mdl;
     //inputs.rtcDevice = rtc;
     inputs.baudRate = 115200;
+
+    //set up inputs for uart0
+    inputs.fcUart = fc_uart;
+    inputs.fcUartBaudRate = 115200;
 
     // Setup, cycle, and teardown topology
     ReferenceDeployment::setupTopology(inputs);

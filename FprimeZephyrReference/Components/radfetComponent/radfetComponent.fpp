@@ -1,6 +1,6 @@
 module Components {
     @ component for radfets on cygnet payload computer
-    passive component radfetComponent {
+    active component radfetComponent {
 
         
         #----------#
@@ -102,6 +102,9 @@ module Components {
         @receiving calls from rate group
         sync input port schedIn: Svc.Sched
 
+        @Recieve commands from payloadCom(proves FC)
+        async input port commandIn: Drv.ByteStreamData
+
         @setting GPIO for RADFET control
         output port gpioSet: [6] Drv.GpioWrite
 
@@ -113,6 +116,9 @@ module Components {
 
         #@ port for storing data to flash
         #output port storeData: Fw.BufferSend
+
+        #@ port for sending buffers to be safely destroyed
+        output port bufferReturn: Fw.BufferSend
 
 
 

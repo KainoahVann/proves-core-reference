@@ -61,6 +61,11 @@ class radfetComponent final : public radfetComponentComponentBase {
         U32 context
     ) override;
 
+    void commandIn_handler(
+        FwIndexType portNum,
+        Fw::Buffer& buffer,
+        const Drv::ByteStreamStatus& status);
+
     // State variables
     bool m_reading;           // Are we taking periodic readings?
     U32 m_totalReadings;      // Counter for total readings
