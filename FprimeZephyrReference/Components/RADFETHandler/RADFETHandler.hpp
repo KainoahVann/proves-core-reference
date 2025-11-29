@@ -57,7 +57,7 @@ class RADFETHandler : public RADFETHandlerComponentBase {
 
 
     static constexpr U32 RESPONSE_START_MARKER = 0xAA;
-    static constexpr U32 RESPONSE_SIZE = 8;
+    static constexpr U32 RESPONSE_SIZE = 6;
     static constexpr U32 MAX_STORED_READINGS = 10000;
 };
 

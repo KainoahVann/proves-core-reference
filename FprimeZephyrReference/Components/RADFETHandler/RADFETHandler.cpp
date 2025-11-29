@@ -153,8 +153,11 @@ bool RADFETHandler::parseRadiationData(const U8* data, U32 size, U32& rawCounts)
     if(data[0] != RESPONSE_START_MARKER){
         return false;
     }
+        
+    U8 moduleNum = data[1];  // Module 1 or 2
+    U8 radfetNum = data[2];  // RADFET 1 or 2
 
-    rawCounts = (static_cast<U32>(data[1]) << 8) | static_cast<U32>(data[2]);
+    rawCounts = (static_cast<U32>(data[3]) << 8) | static_cast<U32>(data[4]);
 
     U8 calculatedChecksum = 0;
     for(U32 i = 0; i < RESPONSE_SIZE - 1; i++){
