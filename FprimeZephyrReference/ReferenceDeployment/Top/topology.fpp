@@ -165,8 +165,9 @@ module ReferenceDeployment {
       rateGroup10Hz.RateGroupMemberOut[0] -> comDriver.schedIn
       rateGroup10Hz.RateGroupMemberOut[1] -> ComCcsdsUart.aggregator.timeout
       rateGroup10Hz.RateGroupMemberOut[2] -> ComCcsds.aggregator.timeout
-      rateGroup10Hz.RateGroupMemberOut[3] -> FileHandling.fileManager.schedIn
-      rateGroup10Hz.RateGroupMemberOut[4] -> cmdSeq.schedIn
+      rateGroup10Hz.RateGroupMemberOut[3] -> fcUartDriver.schedIn
+      rateGroup10Hz.RateGroupMemberOut[4] -> FileHandling.fileManager.schedIn
+      rateGroup10Hz.RateGroupMemberOut[5] -> cmdSeq.schedIn
 
       # Slow rate (1Hz) rate group
       rateGroupDriver.CycleOut[Ports_RateGroups.rateGroup1Hz] -> rateGroup1Hz.CycleIn
@@ -179,7 +180,8 @@ module ReferenceDeployment {
       rateGroup1Hz.RateGroupMemberOut[6] -> comDelay.run
       rateGroup1Hz.RateGroupMemberOut[7] -> burnwire.schedIn
       rateGroup1Hz.RateGroupMemberOut[8] -> antennaDeployer.schedIn
-      rateGroup1Hz.RateGroupMemberOut[9] -> fsSpace.run
+      # rateGroup1Hz.RateGroupMemberOut[9] -> fsSpace.run
+      rateGroup1Hz.RateGroupMemberOut[9] -> fcBufferManager.schedIn
       rateGroup1Hz.RateGroupMemberOut[10] -> FileHandling.fileDownlink.Run
       rateGroup1Hz.RateGroupMemberOut[11] -> startupManager.run
       rateGroup1Hz.RateGroupMemberOut[12] -> powerMonitor.run
@@ -269,11 +271,15 @@ module ReferenceDeployment {
     }
     
     connections RadfetSensor {
-      # Schedule radfetComponent with 1Hz rate group
-      rateGroup1Hz.RateGroupMemberOut[14] -> radfetComponent.schedIn
+
+      # Send data to flight computer via UART
+      radfetComponent.dataOut -> fcUartDriver.$send
 
       #enable radfet through text uart commands from RADFETHandler(fc board)
       fcUartDriver.$recv -> radfetComponent.commandIn
+
+      # Schedule radfetComponent with 1Hz rate group
+      rateGroup1Hz.RateGroupMemberOut[14] -> radfetComponent.schedIn
       
       #Buffer return path
       radfetComponent.bufferReturn -> fcUartDriver.recvReturnIn
@@ -288,9 +294,6 @@ module ReferenceDeployment {
       radfetComponent.gpioSet[4] -> gpioModule2R1.gpioWrite
       radfetComponent.gpioSet[5] -> gpioModule2R2.gpioWrite
       
-      # Send data to flight computer via UART
-      radfetComponent.dataOut -> fcUartDriver.$send
-
       # UART driver allocates/deallocates from BufferManager
       fcUartDriver.allocate -> fcBufferManager.bufferGetCallee
       fcUartDriver.deallocate -> fcBufferManager.bufferSendIn

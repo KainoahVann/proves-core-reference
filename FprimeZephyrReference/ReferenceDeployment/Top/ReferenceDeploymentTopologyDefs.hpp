@@ -74,6 +74,9 @@ struct TopologyState {
     U32 baudRate;                                 //!< Baud rate for UART communication
     CdhCore::SubtopologyState cdhCore;            //!< Subtopology state for CdhCore
     ComCcsds::SubtopologyState comCcsds;          //!< Subtopology state for ComCcsds
+    const device* fcUart;
+    U32 fcUartBaudRate;
+    
     FileHandling::SubtopologyState fileHandling;  //!< Subtopology state for FileHandling
     const device* ina219SysDevice;                //!< device path for battery board ina219
     const device* ina219SolDevice;                //!< device path for solar panel ina219
@@ -81,8 +84,6 @@ struct TopologyState {
     const device* lis2mdlDevice;                  //!< LIS2MDL device path for magnetometer
     const device* rtcDevice;                      //!< RTC device path
 
-    const device* fcUart;
-    U32 fcUartBaudRate;
 };
 
 namespace PingEntries = ::PingEntries;

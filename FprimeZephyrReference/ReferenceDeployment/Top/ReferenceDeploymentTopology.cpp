@@ -125,8 +125,8 @@ void setupTopology(const TopologyState& state) {
     // We have a pipeline for both the LoRa and UART drive to allow for ground harness debugging an
     // for over-the-air communications.
     comDriver.configure(state.uartDevice, state.baudRate);
+    fcUartDriver.configure(state.fcUart, state.fcUartBaudRate);
     /*lora.start(state.loraDevice, Zephyr::TransmitState::DISABLED);
-    comDriver.configure(state.uartDevice, state.baudRate);
 
     lsm6dsoManager.configure(state.lsm6dsoDevice);
     lis2mdlManager.configure(state.lis2mdlDevice);
@@ -134,7 +134,6 @@ void setupTopology(const TopologyState& state) {
     ina219SolManager.configure(state.ina219SolDevice);
     */
 
-    fcUartDriver.configure(state.fcUart, state.fcUartBaudRate);
 }
 
 void startRateGroups() {

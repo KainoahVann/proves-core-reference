@@ -55,7 +55,7 @@ module ReferenceDeployment {
   instance radfetComponent: Components.radfetComponent base id 0x10041000 \
     queue size Default.QUEUE_SIZE \
     stack size Default.STACK_SIZE \
-    priority 13
+    priority 10
   # ----------------------------------------------------------------------
   # Queued component instances
   # ----------------------------------------------------------------------
