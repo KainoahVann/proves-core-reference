@@ -26,6 +26,14 @@ static const struct gpio_dt_spec payloadPowerLoadSwitchGpio = GPIO_DT_SPEC_GET(D
 static const struct gpio_dt_spec payloadBatteryLoadSwitchGpio =
     GPIO_DT_SPEC_GET(DT_NODELABEL(payload_batt_enable), gpios);*/
 
+// RADFET GPIO specs
+static const struct gpio_dt_spec module1EnableGpio = GPIO_DT_SPEC_GET(DT_NODELABEL(module1_enable), gpios);
+static const struct gpio_dt_spec module1R1Gpio = GPIO_DT_SPEC_GET(DT_NODELABEL(module1_r1), gpios);
+static const struct gpio_dt_spec module1R2Gpio = GPIO_DT_SPEC_GET(DT_NODELABEL(module1_r2), gpios);
+static const struct gpio_dt_spec module2EnableGpio = GPIO_DT_SPEC_GET(DT_NODELABEL(module2_enable), gpios);
+static const struct gpio_dt_spec module2R1Gpio = GPIO_DT_SPEC_GET(DT_NODELABEL(module2_r1), gpios);
+static const struct gpio_dt_spec module2R2Gpio = GPIO_DT_SPEC_GET(DT_NODELABEL(module2_r2), gpios);
+
 // Allows easy reference to objects in FPP/autocoder required namespaces
 using namespace ReferenceDeployment;
 
@@ -81,6 +89,12 @@ void configureTopology() {
     gpioPayloadPowerLS.open(payloadPowerLoadSwitchGpio, Zephyr::ZephyrGpioDriver::GpioConfiguration::OUT);
     gpioPayloadBatteryLS.open(payloadBatteryLoadSwitchGpio, Zephyr::ZephyrGpioDriver::GpioConfiguration::OUT);
     */
+    gpioModule1Enable.open(module1EnableGpio, Zephyr::ZephyrGpioDriver::GpioConfiguration::OUT);
+    gpioModule1R1.open(module1R1Gpio, Zephyr::ZephyrGpioDriver::GpioConfiguration::OUT);
+    gpioModule1R2.open(module1R2Gpio, Zephyr::ZephyrGpioDriver::GpioConfiguration::OUT);
+    gpioModule2Enable.open(module2EnableGpio, Zephyr::ZephyrGpioDriver::GpioConfiguration::OUT);
+    gpioModule2R1.open(module2R1Gpio, Zephyr::ZephyrGpioDriver::GpioConfiguration::OUT);
+    gpioModule2R2.open(module2R2Gpio, Zephyr::ZephyrGpioDriver::GpioConfiguration::OUT);
 }
 
 // Public functions for use in main program are namespaced with deployment name ReferenceDeployment

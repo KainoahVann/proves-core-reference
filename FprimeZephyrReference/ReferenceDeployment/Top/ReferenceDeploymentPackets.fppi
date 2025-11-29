@@ -87,6 +87,16 @@ telemetry packets ReferenceDeploymentPackets {
     ReferenceDeployment.powerMonitor.TotalPowerGenerated
   }
 
+  #packet Radfet id 11 group 4 {
+  #  ReferenceDeployment.radfetComponent.MODULE1_RADFET1_adc
+  #  ReferenceDeployment.radfetComponent.MODULE1_RADFET2_adc
+  #  ReferenceDeployment.radfetComponent.MODULE1_state
+  #  ReferenceDeployment.radfetComponent.MODULE2_RADFET1_adc
+  #  ReferenceDeployment.radfetComponent.MODULE2_RADFET2_adc
+  #  ReferenceDeployment.radfetComponent.MODULE2_state
+  #  ReferenceDeployment.radfetComponent.TotalReadings
+  #}
+
 } omit {
   CdhCore.cmdDisp.CommandErrors
   # Only has one library, no custom versions
@@ -122,4 +132,13 @@ telemetry packets ReferenceDeploymentPackets {
   FileHandling.fileManager.Errors
   FileHandling.fileUplink.Warnings
   FileHandling.fileDownlink.Warnings
+
+  # Omit radfet telemetry
+  ReferenceDeployment.radfetComponent.MODULE1_RADFET1_adc
+  ReferenceDeployment.radfetComponent.MODULE1_RADFET2_adc
+  ReferenceDeployment.radfetComponent.MODULE1_state
+  ReferenceDeployment.radfetComponent.MODULE2_RADFET1_adc
+  ReferenceDeployment.radfetComponent.MODULE2_RADFET2_adc
+  ReferenceDeployment.radfetComponent.MODULE2_state
+  ReferenceDeployment.radfetComponent.TotalReadings
 }

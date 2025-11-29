@@ -13,11 +13,13 @@ module Components {
         @stop reasing
         sync command STOP_READINGS()
 
-        @single reading test command
-        sync command TAKE_READING()
+        @ Read specific RADFET
+        sync command READ_RADFET(
+            moduleNum: U8 @< Module number (1 or 2)
+            radfet: U8 @< RADFET number (1 or 2)
+        )
 
         
-
         #----------#
         #  events  #
         #----------#
@@ -30,42 +32,64 @@ module Components {
 
         @logged when single test reading taken
         event ReadingTaken(
-            sensor: U8 @< which sensor (1 or 2)
+            moduleNum: U8 @< Module (1 or 2)
+            radfet: U8 @< RADFET (1 or 2)
             adcValue: U16 @< raw value read
         ) \
-            severity activity high format "RADFET {}, ADC={}"
+            severity activity high format "Module {}, RADFET {}, ADC={}"
 
 
-        @sensor enabled event
-        event SensorEnabled(sensor: U8) severity activity high format "RADFET {} enabled"
+        @module enabled event
+        event ModuleEnabled(moduleNum: U8) severity activity low format "Module {} enabled"
 
-        @sensor disabled event
-        event SensorDisabled(sensor: U8) severity activity high format "RADFET {} disabled"
+        @module disabled event
+        event ModuleDisabled(moduleNum: U8) severity activity low format "Module {} disabled"
 
         @data send event
         event DataSent(
-            sensor: U8
+            moduleNum: U8
+            radfet: U8
             dataSize: U32
         ) \ 
-            severity activity high format "RADFET {} data sent {} bytes to fc"
+            severity activity low format "Module {} RADFET {} data sent {} bytes to fc"
 
+        @Sensor error
+        event SensorError(
+            moduleNum: U8
+            radfet: U8
+        ) \
+            severity warning high format "Module {} RADFET {} error"
+
+        @Invalid RADFET selection error
+        event InvalidSelection(
+            moduleNum: U8
+            radfet: U8
+        ) \
+            severity warning high format "Invalid: Module {} RADFET {} (R1/R2 conflict)"
 
         #-------------#
         #  telemetry  #
         #-------------#
 
-        #radfet 1
-        @ adc val
-        telemetry RADFET1adc: U16
-        @state
-        telemetry RADFET1state: U8
+        # module 1
+        @module 1 RADFET 1 ADC value
+        telemetry MODULE1_RADFET1_adc: U16
 
-        #radfet 2 
-        @adc val
-        telemetry RADFET2adc: U16
-        @state 
-        telemetry RADFET2state: U8
+        @module 1 RADFET 2 ADC value
+        telemetry MODULE1_RADFET2_adc: U16
 
+        @module 1 state
+        telemetry MODULE1_state: U8
+
+        # module 2
+        @module 2 RADFET 1 ADC value
+        telemetry MODULE2_RADFET1_adc: U16
+
+        @module 2 RADFET 2 ADC value
+        telemetry MODULE2_RADFET2_adc: U16
+
+        @module 2 state
+        telemetry MODULE2_state: U8
 
         @total readings 
         telemetry TotalReadings: U32
@@ -79,16 +103,16 @@ module Components {
         sync input port schedIn: Svc.Sched
 
         @setting GPIO for RADFET control
-        output port gpioSet: Drv.GpioWrite
+        output port gpioSet: [6] Drv.GpioWrite
 
-        @port for adc vals
-        output port adcRead: Fw.BufferSend
+        #@port for adc vals
+        #output port adcRead: Fw.BufferSend
 
         @ port for sending rad data back via UART
-        output port dataOut: Fw.BufferSend
+        output port dataOut: Drv.ByteStreamSend
 
-        @ port for storing data to flash
-        output port storeData: Fw.BufferSend
+        #@ port for storing data to flash
+        #output port storeData: Fw.BufferSend
 
 
 

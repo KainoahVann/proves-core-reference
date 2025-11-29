@@ -39,6 +39,13 @@ module ReferenceDeployment {
     #instance gpioPayloadPowerLS
     #instance gpioPayloadBatteryLS
     instance watchdog
+    instance radfetComponent
+    instance gpioModule1Enable
+    instance gpioModule1R1
+    instance gpioModule1R2
+    instance gpioModule2Enable
+    instance gpioModule2R1
+    instance gpioModule2R2
     instance rtcManager
     instance imuManager
     instance lis2mdlManager
@@ -256,6 +263,23 @@ module ReferenceDeployment {
       modeManager.loadSwitchTurnOff[6] -> payloadPowerLoadSwitch.turnOff
       modeManager.loadSwitchTurnOff[7] -> payloadBatteryLoadSwitch.turnOff
     }
-
+    
+    connections RadfetSensor {
+      # Schedule radfetComponent with 1Hz rate group
+      rateGroup1Hz.RateGroupMemberOut[14] -> radfetComponent.schedIn
+      
+      # GPIO control for Module 1
+      radfetComponent.gpioSet[0] -> gpioModule1Enable.gpioWrite
+      radfetComponent.gpioSet[1] -> gpioModule1R1.gpioWrite
+      radfetComponent.gpioSet[2] -> gpioModule1R2.gpioWrite
+      
+      # GPIO control for Module 2
+      radfetComponent.gpioSet[3] -> gpioModule2Enable.gpioWrite
+      radfetComponent.gpioSet[4] -> gpioModule2R1.gpioWrite
+      radfetComponent.gpioSet[5] -> gpioModule2R2.gpioWrite
+      
+      # Send data to flight computer via UART
+      radfetComponent.dataOut -> comDriver.$send
+    }
   }
 }

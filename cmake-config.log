@@ -1,0 +1,238 @@
+Loading Zephyr default modules (Zephyr base (cached)).
+-- Application: /home/tranv/zephyrproject/proves-core-reference
+-- CMake version: 3.26.0
+-- Cache files will be written to: /home/tranv/.cache/zephyr
+-- Zephyr version: 4.3.0 (/home/tranv/zephyrproject/zephyr)
+-- Found west (found suitable version "1.5.0", minimum required is "0.14.0")
+-- Board: cygnet_payload_board, qualifiers: rp2350a/m33
+-- Found host-tools: zephyr 0.17.4 (/home/tranv/zephyr-sdk-0.17.4)
+-- Found toolchain: zephyr 0.17.4 (/home/tranv/zephyr-sdk-0.17.4)
+-- Found BOARD.dts: /home/tranv/zephyrproject/proves-core-reference/boards/bronco_space/cygnet_payload_board/cygnet_payload_board_rp2350a_m33.dts
+-- Generated zephyr.dts: /home/tranv/zephyrproject/proves-core-reference/build-fprime-automatic-zephyr/zephyr/zephyr.dts
+-- Generated pickled edt: /home/tranv/zephyrproject/proves-core-reference/build-fprime-automatic-zephyr/zephyr/edt.pickle
+-- Generated devicetree_generated.h: /home/tranv/zephyrproject/proves-core-reference/build-fprime-automatic-zephyr/zephyr/include/generated/zephyr/devicetree_generated.h
+/home/tranv/zephyrproject/proves-core-reference/build-fprime-automatic-zephyr/zephyr/zephyr.dts:435.26-438.6: Warning (i2c_bus_reg): /soc/i2c@40098000/ina260@4A: I2C bus unit address format error, expected "4a"
+Parsing /home/tranv/zephyrproject/proves-core-reference/Kconfig
+Loaded configuration '/home/tranv/zephyrproject/proves-core-reference/build-fprime-automatic-zephyr/zephyr/.config'
+No change to configuration in '/home/tranv/zephyrproject/proves-core-reference/build-fprime-automatic-zephyr/zephyr/.config'
+No change to Kconfig header in '/home/tranv/zephyrproject/proves-core-reference/build-fprime-automatic-zephyr/zephyr/include/generated/zephyr/autoconf.h'
+-- Using ccache: /usr/bin/ccache
+-- Found gen_kobject_list: /home/tranv/zephyrproject/zephyr/scripts/build/gen_kobject_list.py
+CMake Warning at /home/tranv/zephyrproject/zephyr/CMakeLists.txt:1129 (message):
+  No SOURCES given to Zephyr library: loramac-node
+
+  Excluding target from build.
+
+
+CMake Warning at /home/tranv/zephyrproject/zephyr/CMakeLists.txt:1129 (message):
+  No SOURCES given to Zephyr library: drivers__spi
+
+  Excluding target from build.
+
+
+CMake Warning at /home/tranv/zephyrproject/zephyr/CMakeLists.txt:2354 (message):
+  __ASSERT() statements are globally ENABLED
+
+
+CMake Error at lib/fprime/cmake/utilities.cmake:640 (message):
+  [sub-build] Failed to execute: info-cache/fpp_locs:
+
+
+
+  FAILED: locs.fpp
+  /home/tranv/zephyrproject/proves-core-reference/build-fprime-automatic-zephyr/sub-build-info-cache/locs.fpp
+
+
+  cd
+  /home/tranv/zephyrproject/proves-core-reference/build-fprime-automatic-zephyr/sub-build-info-cache
+  && /home/tranv/zephyrproject/proves-core-reference/fprime-venv/bin/python3
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/cmake/target/sub-build/../tools/redirector.py
+  /home/tranv/zephyrproject/proves-core-reference/build-fprime-automatic-zephyr/sub-build-info-cache/locs.fpp
+  /home/tranv/zephyrproject/proves-core-reference/fprime-venv/bin/fpp-locate-defs
+  -d
+  /home/tranv/zephyrproject/proves-core-reference/build-fprime-automatic-zephyr
+  /home/tranv/zephyrproject/proves-core-reference/build-fprime-automatic-zephyr/cmake/platform/zephyr/Platform/PlatformTypes.fpp
+  /home/tranv/zephyrproject/proves-core-reference/build-fprime-automatic-zephyr/F-Prime/Fpp/ToCpp.fpp
+  /home/tranv/zephyrproject/proves-core-reference/build-fprime-automatic-zephyr/F-Prime/default/config/AcConstants.fpp
+  /home/tranv/zephyrproject/proves-core-reference/build-fprime-automatic-zephyr/F-Prime/default/config/DpCfg.fpp
+  /home/tranv/zephyrproject/proves-core-reference/build-fprime-automatic-zephyr/F-Prime/default/config/ComCfg.fpp
+  /home/tranv/zephyrproject/proves-core-reference/build-fprime-automatic-zephyr/F-Prime/default/config/FpConfig.fpp
+  /home/tranv/zephyrproject/proves-core-reference/build-fprime-automatic-zephyr/F-Prime/default/config/FpConstants.fpp
+  /home/tranv/zephyrproject/proves-core-reference/build-fprime-automatic-zephyr/F-Prime/default/config/FpySequencerCfg.fpp
+  /home/tranv/zephyrproject/proves-core-reference/build-fprime-automatic-zephyr/F-Prime/default/config/MemoryAllocation.fpp
+  /home/tranv/zephyrproject/proves-core-reference/build-fprime-automatic-zephyr/F-Prime/default/config/PlatformCfg.fpp
+  /home/tranv/zephyrproject/proves-core-reference/build-fprime-automatic-zephyr/F-Prime/default/config/PolyDbCfg.fpp
+  /home/tranv/zephyrproject/proves-core-reference/build-fprime-automatic-zephyr/F-Prime/default/config/VersionCfg.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Fw/Buffer/Buffer.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Fw/Cmd/Cmd.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Fw/Com/Com.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Fw/Dp/Dp.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Fw/Fpy/StatementArgBuffer.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Fw/Interfaces/Channel.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Fw/Interfaces/Command.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Fw/Interfaces/Event.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Fw/Log/Log.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Fw/Prm/Prm.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Fw/Time/Time.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Fw/Tlm/Tlm.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Fw/Ports/CompletionStatus/CompletionStatus.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Fw/Ports/Ready/Ready.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Fw/Ports/Signal/Signal.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Fw/Ports/SuccessCondition/SuccessCondition.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Fw/Types/Types.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/Cycle/Cycle.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/Fatal/Fatal.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/Interfaces/BufferAllocation.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/Interfaces/Com.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/Interfaces/Deframer.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/Interfaces/FrameAccumulator.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/Interfaces/Framer.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/Interfaces/Router.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/Interfaces/Time.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/Ping/Ping.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/PolyIf/PolyIf.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/Sched/Sched.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/Seq/Seq.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/WatchDog/WatchDog.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/Ports/CommsPorts/CommsPorts.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/Ports/OsTimeEpoch/OsTimeEpoch.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/Ports/VersionPorts/VersionPorts.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/ActivePhaser/ActivePhaser.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/ActiveRateGroup/ActiveRateGroup.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/AssertFatalAdapter/AssertFatalAdapter.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/BufferManager/BufferManager.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/BufferLogger/BufferLogger.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/BufferRepeater/BufferRepeater.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/ChronoTime/ChronoTime.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/ComLogger/ComLogger.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/ComQueue/ComQueue.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/ComSplitter/ComSplitter.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/ComStub/ComStub.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/CmdDispatcher/CmdDispatcher.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/CmdSequencer/CmdSequencer.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/CmdSplitter/CmdSplitter.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/DpCatalog/DpCatalog.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/DpManager/DpManager.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/DpPorts/DpPorts.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/DpWriter/DpWriter.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/EventManager/EventManager.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/FatalHandler/FatalHandler.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/FileDownlinkPorts/FileDownlinkPorts.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/FileDownlink/FileDownlink.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/FileManager/FileManager.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/FileUplink/FileUplink.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/FprimeDeframer/FprimeDeframer.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/FprimeFramer/FprimeFramer.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/FprimeProtocol/FprimeProtocol.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/FprimeRouter/FprimeRouter.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/FrameAccumulator/FrameAccumulator.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/GenericHub/GenericHub.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/Health/Health.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/OsTime/OsTime.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/PassiveRateGroup/PassiveRateGroup.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/PolyDb/PolyDb.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/PrmDb/PrmDb.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/RateGroupDriver/RateGroupDriver.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/SeqDispatcher/SeqDispatcher.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/StaticMemory/StaticMemory.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/TlmChan/TlmChan.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/TlmPacketizer/TlmPacketizer.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/SystemResources/SystemResources.fpp
+  /home/tranv/zephyrproject/proves-core-reference/build-fprime-automatic-zephyr/F-Prime/Svc/Subtopologies/CdhCore/CdhCoreConfig/CdhCoreConfig.fpp
+  /home/tranv/zephyrproject/proves-core-reference/build-fprime-automatic-zephyr/F-Prime/Svc/Subtopologies/CdhCore/CdhCoreConfig/CdhCoreFatalHandlerConfig.fpp
+  /home/tranv/zephyrproject/proves-core-reference/build-fprime-automatic-zephyr/F-Prime/Svc/Subtopologies/CdhCore/CdhCoreConfig/CdhCoreTlmConfig.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/Subtopologies/CdhCore/CdhCore.fpp
+  /home/tranv/zephyrproject/proves-core-reference/build-fprime-automatic-zephyr/F-Prime/Svc/Subtopologies/ComCcsds/ComCcsdsConfig/ComCcsdsConfig.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/Subtopologies/ComCcsds/ComCcsds.fpp
+  /home/tranv/zephyrproject/proves-core-reference/build-fprime-automatic-zephyr/F-Prime/Svc/Subtopologies/ComFprime/ComFprimeConfig/ComFprimeConfig.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/Subtopologies/ComFprime/ComFprime.fpp
+  /home/tranv/zephyrproject/proves-core-reference/build-fprime-automatic-zephyr/F-Prime/Svc/Subtopologies/FileHandling/FileHandlingConfig/FileHandlingConfig.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/Subtopologies/FileHandling/FileHandling.fpp
+  /home/tranv/zephyrproject/proves-core-reference/build-fprime-automatic-zephyr/F-Prime/Svc/Subtopologies/DataProducts/DataProductsConfig/DataProductsConfig.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/Subtopologies/DataProducts/DataProducts.fpp
+  /home/tranv/zephyrproject/proves-core-reference/build-fprime-automatic-zephyr/F-Prime/Svc/Subtopologies/ComLoggerTee/ComLoggerTeeConfig/ComLoggerTeeConfig.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/Subtopologies/ComLoggerTee/ComLoggerTee.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/PassiveConsoleTextLogger/PassiveConsoleTextLogger.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/ActiveTextLogger/ActiveTextLogger.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/Version/Version.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/FpySequencer/FpySequencer.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/FpySequencer/FpySequencerTypes.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/Ccsds/Types/Types.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/Ccsds/Ports/Ports.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/Ccsds/SpacePacketDeframer/SpacePacketDeframer.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/Ccsds/SpacePacketFramer/SpacePacketFramer.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/Ccsds/TcDeframer/TcDeframer.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/Ccsds/TmFramer/TmFramer.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/Ccsds/ApidManager/ApidManager.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Svc/ComAggregator/ComAggregator.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Os/Models/File.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Os/Models/Task.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Os/Models/Mutex.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Os/Models/Directory.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Os/Models/FileSystem.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Os/Models/Generic.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Os/Models/RawTime.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Os/Models/Queue.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Os/Types.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Drv/Interfaces/AsyncByteStreamDriver.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Drv/Interfaces/ByteStreamDriver.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Drv/Interfaces/Gpio.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Drv/Interfaces/I2c.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Drv/Interfaces/Spi.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Drv/Interfaces/Tick.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Drv/Ports/DataTypes/DataTypes.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Drv/Ports/GpioDriverPorts.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Drv/Ports/I2cDriverPorts.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Drv/Ports/SpiDriverPorts.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime/Drv/ByteStreamDriverModel/ByteStreamDriverModel.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime-zephyr/fprime-zephyr/Drv/LoRa/LoRa.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime-zephyr/fprime-zephyr/Drv/ZephyrUartDriver/ZephyrUartDriver.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime-zephyr/fprime-zephyr/Drv/ZephyrGpioDriver/ZephyrGpioDriver.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime-zephyr/fprime-zephyr/Drv/ZephyrRateDriver/ZephyrRateDriver.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime-zephyr/fprime-zephyr/Drv/ZephyrI2cDriver/ZephyrI2cDriver.fpp
+  /home/tranv/zephyrproject/proves-core-reference/lib/fprime-zephyr/fprime-zephyr/Drv/ZephyrSpiDriver/ZephyrSpiDriver.fpp
+  /home/tranv/zephyrproject/proves-core-reference/FprimeZephyrReference/Components/AntennaDeployer/AntennaDeployer.fpp
+  /home/tranv/zephyrproject/proves-core-reference/FprimeZephyrReference/Components/BootloaderTrigger/BootloaderTrigger.fpp
+  /home/tranv/zephyrproject/proves-core-reference/FprimeZephyrReference/Components/Burnwire/Burnwire.fpp
+  /home/tranv/zephyrproject/proves-core-reference/FprimeZephyrReference/Components/ComDelay/ComDelay.fpp
+  /home/tranv/zephyrproject/proves-core-reference/FprimeZephyrReference/Components/Drv/Ina219Manager/Ina219Manager.fpp
+  /home/tranv/zephyrproject/proves-core-reference/FprimeZephyrReference/Components/Drv/Lis2mdlManager/Lis2mdlManager.fpp
+  /home/tranv/zephyrproject/proves-core-reference/FprimeZephyrReference/Components/Drv/Lsm6dsoManager/Lsm6dsoManager.fpp
+  /home/tranv/zephyrproject/proves-core-reference/FprimeZephyrReference/Components/Drv/RtcManager/RtcManager.fpp
+  /home/tranv/zephyrproject/proves-core-reference/FprimeZephyrReference/Components/Drv/Types/Types.fpp
+  /home/tranv/zephyrproject/proves-core-reference/FprimeZephyrReference/Components/FatalHandler/FatalHandler.fpp
+  /home/tranv/zephyrproject/proves-core-reference/FprimeZephyrReference/Components/FsSpace/FsSpace.fpp
+  /home/tranv/zephyrproject/proves-core-reference/FprimeZephyrReference/Components/ImuManager/ImuManager.fpp
+  /home/tranv/zephyrproject/proves-core-reference/FprimeZephyrReference/Components/LoadSwitch/LoadSwitch.fpp
+  /home/tranv/zephyrproject/proves-core-reference/FprimeZephyrReference/Components/ModeManager/ModeManager.fpp
+  /home/tranv/zephyrproject/proves-core-reference/FprimeZephyrReference/Components/NullPrmDb/NullPrmDb.fpp
+  /home/tranv/zephyrproject/proves-core-reference/FprimeZephyrReference/Components/PowerMonitor/PowerMonitor.fpp
+  /home/tranv/zephyrproject/proves-core-reference/FprimeZephyrReference/Components/ResetManager/ResetManager.fpp
+  /home/tranv/zephyrproject/proves-core-reference/FprimeZephyrReference/Components/StartupManager/StartupManager.fpp
+  /home/tranv/zephyrproject/proves-core-reference/FprimeZephyrReference/Components/Watchdog/Watchdog.fpp
+  /home/tranv/zephyrproject/proves-core-reference/FprimeZephyrReference/Components/radfetComponent/radfetComponent.fpp
+  /home/tranv/zephyrproject/proves-core-reference/FprimeZephyrReference/ComCcsdsUart/ComCcsds.fpp
+  /home/tranv/zephyrproject/proves-core-reference/FprimeZephyrReference/ReferenceDeployment/Top/instances.fpp
+  /home/tranv/zephyrproject/proves-core-reference/FprimeZephyrReference/ReferenceDeployment/Top/topology.fpp
+
+
+  fpp-locate-defs
+
+
+  /home/tranv/zephyrproject/proves-core-reference/FprimeZephyrReference/Components/radfetComponent/radfetComponent.fpp:23.13
+
+
+              module: U8
+              ^
+
+  error: ) expected
+
+  ninja: build stopped: subcommand failed.
+Call Stack (most recent call first):
+  lib/fprime/cmake/sub-build/sub-build.cmake:75 (execute_process_or_fail)
+  lib/fprime/cmake/FPrime.cmake:163 (run_sub_build)
+  lib/fprime/cmake/FPrime.cmake:244 (fprime_initialize_build_system)
+  CMakeLists.txt:31 (include)
+
+
+-- Configuring incomplete, errors occurred!
