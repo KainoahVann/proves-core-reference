@@ -61,6 +61,7 @@ module ReferenceDeployment {
     instance payloadPowerLoadSwitch
     instance payloadBatteryLoadSwitch
     instance fsSpace
+    instance payload
     instance cmdSeq
     instance startupManager
     instance powerMonitor
@@ -271,21 +272,24 @@ module ReferenceDeployment {
 
 
     connections radfetHandler {
-    # Connect to PayloadCom for UART communication
-    #radfetHandler.commandOut -> payloadCom.commandIn
-    #payloadCom.uartDataOut -> radfetHandler.dataIn
+      # Connect to PayloadCom for UART communication
+      payload.uartForward -> peripheralUartDriver.$send
+      peripheralUartDriver.$recv -> payload.uartDataIn
+
+      #critical buffer return
+      payload.bufferReturn -> peripheralUartDriver.recvReturnIn
+
+      #connections to handler 
+      payload.uartDataOut -> radfetHandler.dataIn
+      radfetHandler.commandOut -> payload.commandIn
+
+      # UART driver allocates/deallocates from BufferManager
+      peripheralUartDriver.allocate -> payloadBufferManager.bufferGetCallee
+      peripheralUartDriver.deallocate -> payloadBufferManager.bufferSendIn
     
-    # Add to rate group for periodic scheduling
-    rateGroup10Hz.RateGroupMemberOut[6] -> radfetHandler.schedIn
+      # Add to rate group for periodic scheduling
+      rateGroup10Hz.RateGroupMemberOut[6] -> radfetHandler.schedIn
     
-    # Standard F' connections
-    #radfetHandler.timeCaller -> rtcManager.timeGetPort
-    #radfetHandler.cmdRegOut -> CdhCore.cmdDisp.compCmdReg
-    #radfetHandler.cmdResponseOut -> CdhCore.cmdDisp.compCmdStat
-    #CdhCore.cmdDisp.compCmdSend -> radfetHandler.cmdIn
-    #radfetHandler.eventOut -> CdhCore.events.log
-    #radfetHandler.textEventOut -> CdhCore.textLogger.textLog
-    #radfetHandler.tlmOut -> CdhCore.tlmSend.tlm
     }
 
   }
