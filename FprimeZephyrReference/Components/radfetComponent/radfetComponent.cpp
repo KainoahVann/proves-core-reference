@@ -320,9 +320,10 @@ void radfetComponent::sendToFC(U8 moduleNum, U8 radfet, U16 adcValue) {
     packet[0] = 0xAA;  // START_MARKER
     packet[1] = moduleNum;
     packet[2] = radfet;
-    packet[3] = (adcValue >> 8) & 0xFF;  // High byte
-    packet[4] = adcValue & 0xFF;         // Low byte
-    packet[5] = packet[0] ^ packet[1] ^ packet[2] ^ packet[3] ^ packet[4];  // XOR checksum
+    packet[3] = adcValue;
+    //packet[3] = (adcValue >> 8) & 0xFF;  // High byte
+    //packet[4] = adcValue & 0xFF;         // Low byte
+    //packet[5] = packet[0] ^ packet[1] ^ packet[2] ^ packet[3] ^ packet[4];  // XOR checksum
     
     // Send via UART to FC
     Fw::Buffer dataBuffer(packet, 6);
