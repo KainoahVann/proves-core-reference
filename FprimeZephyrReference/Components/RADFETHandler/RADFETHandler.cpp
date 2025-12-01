@@ -43,8 +43,8 @@ void RADFETHandler ::dataIn_handler(FwIndexType portNum, Fw::Buffer& buffer, con
     U32 dataSize = static_cast<U32>(buffer.getSize());
 
     if(dataSize >= 4){
-        this->log_ACTIVITY_LO_RawDataReceived(data[3]);
-        this->log_ACTIVITY_LO_RawDataReceived(data[4]);
+        this->log_ACTIVITY_LO_RawDataReceived(static_cast<U32>(data[3]) << 8 | static_cast<U32>(data[4]));
+        //this->log_ACTIVITY_LO_RawDataReceived(data[4]);
     }
 
     if (!accumulateSensorData(data, dataSize)){
