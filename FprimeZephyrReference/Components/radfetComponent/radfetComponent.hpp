@@ -73,6 +73,7 @@ class radfetComponent final : public radfetComponentComponentBase {
     bool m_module2Enabled;    // Module 2 power state
     U8 m_currentModule;       // Currently selected module
     U8 m_currentRadfet;       // Currently selected RADFET
+    U32 numCalls = 0;
     
     // Helper methods
     void enableModule(U8 module);

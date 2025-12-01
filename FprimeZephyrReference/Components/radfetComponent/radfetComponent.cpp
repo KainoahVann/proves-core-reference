@@ -31,7 +31,7 @@
 #define GPIO_MODULE2_R2_CTRL 5
 
 // Timing
-#define SETTLING_TIME_MS 10  // Wait time after enabling before ADC read
+#define SETTLING_TIME_MS 5000  // Wait time after enabling before ADC read
 
 
 namespace Components {
@@ -106,7 +106,11 @@ void radfetComponent::READ_RADFET_cmdHandler(
 // Port handler: Scheduled input for periodic readings
 void radfetComponent::schedIn_handler(FwIndexType portNum, U32 context) {
     if (m_reading) {
+      this->numCalls++;
         // Read all 4 RADFETs in sequence
+      if(this->numCalls % 5000 !=0){
+        return;
+       }
         readRadfet(1, 1);
         readRadfet(1, 2);
         readRadfet(2, 1);
