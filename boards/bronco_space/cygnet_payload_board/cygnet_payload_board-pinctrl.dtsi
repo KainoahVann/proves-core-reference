@@ -43,4 +43,16 @@
 			input-enable;
 		};
 	};
+	adc_default: adc_default {
+        group1 {
+            pinmux = <ADC1_P27>;
+            input-enable;
+        };
+    };
+	adc_default: adc_default {
+        group1 {
+            pinmux = <ADC3_P29>;
+            input-enable;
+        };
+    };
 };
