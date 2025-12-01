@@ -69,12 +69,15 @@ void RADFETHandler::START_READINGS_cmdHandler(FwOpcodeType opCode, U32 cmdSeq, U
         openDataFile();
     }
 
+    sendSensorCommand("START\n");
+
     this->log_ACTIVITY_HI_ReadingStarted(interval);
     this->cmdResponse_out(opCode, cmdSeq, Fw::CmdResponse::OK);
 }
 
 void RADFETHandler::STOP_READINGS_cmdHandler(FwOpcodeType opCode, U32 cmdSeq){
     m_periodicReadings = false;
+    sendSensorCommand("STOP\n");
     this->log_ACTIVITY_HI_ReadingStopped();
     this->cmdResponse_out(opCode, cmdSeq, Fw::CmdResponse::OK);
 }
@@ -224,7 +227,7 @@ F32 RADFETHandler::convertToDoseRate(U32 rawCounts){
 }
 
 void RADFETHandler::takeRadiationReading(){
-    sendSensorCommand("MEASURE");
+    sendSensorCommand("MEASURE\n");
 }
 
 void RADFETHandler::sendSensorCommand(const char* command){
