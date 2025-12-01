@@ -45,13 +45,11 @@
 	};
 	adc_default: adc_default {
         group1 {
-            pinmux = <ADC1_P27>;
+            pinmux = <ADC1_CH1_P27>;
             input-enable;
         };
-    };
-	adc_default: adc_default {
-        group1 {
-            pinmux = <ADC3_P29>;
+        group2 {
+            pinmux = <ADC3_CH2_P29>;
             input-enable;
         };
     };
