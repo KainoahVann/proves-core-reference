@@ -75,6 +75,8 @@ zephyr_udc0: &usbd {
     status = "okay";
     #address-cells = <1>;
     #size-cells = <0>;
+	pinctrl-0 = <&adc_default>;
+    pinctrl-names = "default";
     
     channel@1 {
         reg = <1>;
