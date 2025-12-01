@@ -293,8 +293,17 @@ U16 radfetComponent::readADC(U8 moduleNum) {
     };
     
     int ret = adc_read(adc_dev, &sequence);
+        if (ret != 0) {
+        return 0; // error
+    }
+
+    // Convert raw ADC counts to millivolts
+    const int vref_mv = 3300; 
+    const int max_val = (1 << ADC_RESOLUTION) - 1; // 2^resolution - 1
+    U16 voltage_mv = (adc_buffer * vref_mv) / max_val;
+
+    return voltage_mv;
     
-    return (ret == 0) ? adc_buffer : 0;
 }
 
 void radfetComponent::updateTelemetry(U8 moduleNum, U8 radfet, U16 value) {
