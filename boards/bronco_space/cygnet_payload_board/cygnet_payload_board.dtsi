@@ -274,32 +274,32 @@ zephyr_udc0: &usbd {
         compatible = "gpio-leds";
         
         module1_enable: module1-enable {
-            gpios = <&gpio0 5 GPIO_ACTIVE_HIGH>;
+            gpios = <&gpio0 3 GPIO_ACTIVE_HIGH>;
             label = "Module1 Enable CTRL";
         };
         
         module1_r1: module1-r1 {
-            gpios = <&gpio0 4 GPIO_ACTIVE_HIGH>;
+            gpios = <&gpio0 2 GPIO_ACTIVE_HIGH>;
             label = "Module1 R1 CTRL";
         };
         
         module1_r2: module1-r2 {
-            gpios = <&gpio0 7 GPIO_ACTIVE_HIGH>;
+            gpios = <&gpio0 4 GPIO_ACTIVE_HIGH>;
             label = "Module1 R2 CTRL";
         };
         
         module2_enable: module2-enable {
-            gpios = <&gpio0 9 GPIO_ACTIVE_HIGH>;
+            gpios = <&gpio0 6 GPIO_ACTIVE_HIGH>;
             label = "Module2 Enable CTRL";
         };
         
         module2_r1: module2-r1 {
-            gpios = <&gpio0 8 GPIO_ACTIVE_HIGH>;
+            gpios = <&gpio0 5 GPIO_ACTIVE_HIGH>;
             label = "Module2 R1 CTRL";
         };
         
         module2_r2: module2-r2 {
-            gpios = <&gpio0 10 GPIO_ACTIVE_HIGH>;
+            gpios = <&gpio0 7 GPIO_ACTIVE_HIGH>;
             label = "Module2 R2 CTRL";
         };
     };
