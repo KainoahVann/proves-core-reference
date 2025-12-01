@@ -131,10 +131,10 @@ void radfetComponent::commandIn_handler(FwIndexType portNum, Fw::Buffer& buffer,
   const char* command = reinterpret_cast<const char*>(buffer.getData());
   U32 size = buffer.getSize();
 
-  if(size == 7 && strncmp(command,"/start\n",7) ==0){
+  if(size == 6 && strncmp(command,"START",5) == 0){
     m_reading = true;
     this->log_ACTIVITY_HI_ReadingsStarted();
-  }else if(size == 6 && strncmp(command,"/stop\n",6)){
+  }else if(size == 5 && strncmp(command,"STOP",4) == 0){
     m_reading = false;
     
     // Disable both modules
@@ -142,6 +142,13 @@ void radfetComponent::commandIn_handler(FwIndexType portNum, Fw::Buffer& buffer,
     disableModule(2);
     
     this->log_ACTIVITY_HI_ReadingsStopped();
+  }else if(size == 8 && strncmp(command,"MEASURE",7) == 0){
+    // Read all 4 RADFETs in sequence
+    readRadfet(1, 1);
+    readRadfet(1, 2);
+    readRadfet(2, 1);
+    readRadfet(2, 2);
+
   }
 
   this->bufferReturn_out(0,buffer);
