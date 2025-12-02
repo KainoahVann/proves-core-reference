@@ -27,7 +27,7 @@ class RADFETHandler : public RADFETHandlerComponentBase {
     bool parseRadiationData(const U8* data, U32 size, U32& rawCounts);
     void removeProcessedData(U32 size);
     bool validateRawData(U32 rawCounts);
-    F32 convertToRadiationDose(U32 rawCounts);
+    F32 convertToRadiationDose(U32 rawCounts, U8 moduleNum);
     F32 convertToDoseRate(U32 rawCounts);
     void takeRadiationReading();
     void sendSensorCommand(const char* command);

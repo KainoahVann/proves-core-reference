@@ -195,18 +195,30 @@ bool RADFETHandler::validateRawData(U32 rawCounts){
     return true;
 }
 
-F32 RADFETHandler::convertToRadiationDose(U32 rawCounts){
-    Fw::ParamValid valid;
-    F32 calibrationA = this->paramGet_CalibrationA(valid);
-    F32 calibrationB = this->paramGet_CalibrationB(valid);
+F32 RADFETHandler::convertToRadiationDose(U32 rawCounts, U8 moduleNum){
+    
+    F32 calibrationA; // fixed calibration values
+    F32 calibrationB;
 
-    F32 dose = (calibrationA * static_cast<F32>(rawCounts)) + calibrationB;
+    if (moduleNum == 1) { // Module 1 - 10kRad
+        calibrationA = 0.0068f;
+        calibrationB = 0.6164f;
+    }
+    else if (moduleNum == 2) { // Module 2 - 50kRad
+        calibrationA = 0.0241f;
+        calibrationB = 0.4752f;
+    }
+
+    F32 deltaV_V = (static_cast<F32>(rawCounts) / 4095.0f) * 3.3f;
+
+    F32 dose = pow(((deltaV_V)/calibrationA), (1.0f/calibrationB));
+
 
     this->log_ACTIVITY_HI_DoseCalculated(rawCounts, dose);
     return dose;
 }
 
-F32 RADFETHandler::convertToDoseRate(U32 rawCounts){
+/*F32 RADFETHandler::convertToDoseRate(U32 rawCounts){
     F32 currentDose = convertToRadiationDose(rawCounts);
 
     if(m_lastReadingTimestamp > 0){
@@ -221,7 +233,7 @@ F32 RADFETHandler::convertToDoseRate(U32 rawCounts){
     m_lastReadingTimestamp = m_readingsCount;
 
     return m_lastDoseRate;
-}
+}*/
 
 void RADFETHandler::takeRadiationReading(){
     sendSensorCommand("MEASURE");
