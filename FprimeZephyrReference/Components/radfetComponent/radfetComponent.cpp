@@ -106,11 +106,13 @@ void radfetComponent::READ_RADFET_cmdHandler(
 // Port handler: Scheduled input for periodic readings
 void radfetComponent::schedIn_handler(FwIndexType portNum, U32 context) {
     if (m_reading) {
-      this->numCalls++;
         // Read all 4 RADFETs in sequence
-      if(this->numCalls % 5000 !=0){
-        return;
-       }
+        if(this->numCalls % 10 !=0){
+          this->numCalls++;
+          return;
+        }else{
+          this->numCalls++;
+        }
         readRadfet(1, 1);
         readRadfet(1, 2);
         readRadfet(2, 1);
