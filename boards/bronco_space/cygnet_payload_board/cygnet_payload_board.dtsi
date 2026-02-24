@@ -1,0 +1,308 @@
+#include <freq.h>
+
+#include <zephyr/dt-bindings/i2c/i2c.h>
+#include <zephyr/dt-bindings/pwm/pwm.h>
+
+#include "cygnet_payload_board-pinctrl.dtsi"
+
+/ {
+	chosen {
+		zephyr,sram = &sram0;
+		zephyr,flash = &flash0;
+		zephyr,console = &cdc_acm_uart0;
+		zephyr,shell-uart = &cdc_acm_uart0;
+	};
+
+	fstab {
+                compatible = "zephyr,fstab";
+                ffs1: ffs1 {
+                        compatible = "zephyr,fstab,fatfs";
+                        automount;
+                        disk-access;
+                        mount-point = "/";
+                };
+        };
+
+
+	aliases {
+		watchdog0 = &wdt0;
+	};
+
+	leds {
+		compatible = "gpio-leds";
+		led0: led0 {
+			gpios = <&gpio0 19 GPIO_ACTIVE_HIGH>;
+			label = "Watchdog LED";
+		};	
+	};
+};
+
+zephyr_udc0: &usbd {
+	status = "okay";
+};
+
+&zephyr_udc0  {
+	cdc_acm_uart0: cdc_acm_uart0 {
+		compatible = "zephyr,cdc-acm-uart";
+		label = "CDC_ACM_0";
+	};
+};
+
+&flash0 {
+       reg = <0x10000000 DT_SIZE_M(4)>;
+};
+
+&timer0 {
+	status = "okay";
+};
+
+&wdt0 {
+	status = "okay";
+};
+
+&gpio0 {
+	status = "okay";
+};
+
+&uart0 {
+  status = "okay";
+  pinctrl-0 = <&uart0_default>;
+  current-speed = <115200>;
+  pinctrl-names = "default";
+};
+
+&adc {
+    status = "okay";
+    #address-cells = <1>;
+    #size-cells = <0>;
+	pinctrl-0 = <&adc_default>;
+    pinctrl-names = "default";
+    
+    channel@1 {
+        reg = <1>;
+        zephyr,gain = "ADC_GAIN_1";
+        zephyr,reference = "ADC_REF_INTERNAL";
+        zephyr,acquisition-time = <ADC_ACQ_TIME_DEFAULT>;
+        zephyr,resolution = <12>;
+    };
+    
+    channel@3 {
+        reg = <3>;
+        zephyr,gain = "ADC_GAIN_1";
+        zephyr,reference = "ADC_REF_INTERNAL";
+        zephyr,acquisition-time = <ADC_ACQ_TIME_DEFAULT>;
+        zephyr,resolution = <12>;
+    };
+};
+
+/*&spi0 {
+	status = "okay";
+	cs-gpios = <&gpio0 15 GPIO_ACTIVE_LOW>;
+	pinctrl-0 = <&spi0_default>;
+	pinctrl-names = "default";
+	sdhc0: sdhc@0 {
+                compatible = "zephyr,sdhc-spi-slot";
+                reg = <0>;
+                status = "okay";
+                mmc {
+                    compatible = "zephyr,sdmmc-disk";
+                    disk-name = "SD";
+                    status = "okay";
+                };
+                spi-max-frequency = <24000000>;
+        };
+};
+
+&spi1 {
+	status = "okay";
+	cs-gpios = <&gpio0 9 GPIO_ACTIVE_LOW>;
+	pinctrl-0 = <&spi1_default>;
+	pinctrl-names = "default";
+
+	lora0: sx1276@0 {
+		compatible = "semtech,sx1276";
+		reg = <0>;
+		spi-max-frequency = <125000>;
+		dio-gpios =  <&gpio0 14 (GPIO_PULL_DOWN | GPIO_ACTIVE_HIGH)>,<&gpio0 13 (GPIO_PULL_DOWN | GPIO_ACTIVE_HIGH)>;
+		reset-gpios = <&gpio0 6 GPIO_ACTIVE_LOW>;
+		power-amplifier-output = "pa-boost";
+		label = "HOPE_RF";
+	};
+};*/
+
+/*&i2c0 {
+	status = "okay";
+	pinctrl-0 = <&i2c0_default>;
+	pinctrl-names = "default";
+	clock-frequency = <100000>;
+
+	ina219_0: ina219_0@40 {
+		compatible = "ti,ina219";
+		reg = <0x40>;
+		brng = <0>;
+		pg = <0>;
+		badc = <12>;
+		sadc = <12>;
+		shunt-milliohm = <2>;
+		lsb-microamp = <61>;
+		label = "INA219 sys";
+	};
+
+	ina219_1: ina219_1@41 {
+		compatible = "ti,ina219";
+		reg = <0x41>;
+		brng = <0>;
+		pg = <0>;
+		badc = <12>;
+		sadc = <12>;
+		shunt-milliohm = <2>;
+		lsb-microamp = <61>;
+		label = "INA219 sol";
+	};
+};*/
+
+
+/* &i2c1 {
+	status = "okay";
+	pinctrl-0 = <&i2c1_default>;
+	pinctrl-names = "default";
+	clock-frequency = <100000>;
+
+	lsm6dso0: lsm6dso0@6b {
+		compatible = "st,lsm6dso";
+		reg = <0x6b>;
+		label = "LSM6DSO";
+	};
+
+	lis2mdl0: lis2mdl0@1e {
+		compatible = "st,lis2mdl";
+		reg = <0x1e>;
+		label = "LIS2MDL";
+	};
+
+	rtc0: rtc0@52 {
+		compatible = "microcrystal,rv3028";
+		reg = <0x52>;
+		int-gpios = <&gpio0 27 GPIO_ACTIVE_HIGH>;
+		backup-switch-mode = "direct";
+		label = "RV3028";
+	};
+	ina219: ina219@40 {
+		compatible = "ti,ina219";
+		reg = <0x40>;
+		shunt-milliohm = <2>;
+		lsb-microamp = <100>;
+		label = "INA219";
+	};
+	mcp23017: mcp23017@20 {
+		compatible = "microchip,mcp23017";
+		reg = <0x20>;
+		gpio-controller;
+		#gpio-cells = <2>;
+
+		 gpio-line-names must match the numeric indexes used below. The
+		 * topology and gpio nodes expect the following mapping (index : name):
+		 *  0: ENABLE_HEATER (GPA0)
+		 *  1: PAYLOAD_PWR_ENABLE (GPA1)
+		 *  2: FIRE_DEPLOY2_B (GPA2)
+		 *  3: PAYLOAD_BATT_ENABLE (GPA3)
+		 *  4: RF2_IO2 (GPA4)
+		 *  5: RF2_IO1 (GPA5)
+		 *  6: RF2_IO0 (GPA6)
+		 *  7: RF2_IO3 (GPA7)
+		 *  8: FACE4_ENABLE (GPB0)
+		 *  9: FACE0_ENABLE (GPB1)
+		 * 10: FACE1_ENABLE (GPB2)
+		 * 11: FACE2_ENABLE (GPB3)
+		 * 12: FACE3_ENABLE (GPB4)
+		 * 13: FACE5_ENABLE (GPB5)
+		 * 14: READONLY (GPB6)
+		 * 15: CHARGE (GPB7)
+		 
+		gpio-line-names = "ENABLE_HEATER", "PAYLOAD_PWR_ENABLE", "FIRE_DEPLOY2_B", "PAYLOAD_BATT_ENABLE",
+						  "RF2_IO2", "RF2_IO1", "RF2_IO0", "RF2_IO3",
+						  "FACE4_ENABLE", "FACE0_ENABLE", "FACE1_ENABLE", "FACE2_ENABLE",
+						  "FACE3_ENABLE", "FACE5_ENABLE", "READONLY", "CHARGE";
+
+		reset-gpios = <&gpio0 20 GPIO_ACTIVE_LOW>;
+
+		ngpios = <16>;
+	};
+};*/
+
+&i2c1 {
+	status = "okay";
+	pinctrl-0 = <&i2c1_default>;
+	pinctrl-names = "default";
+	clock-frequency = <100000>;
+
+	ina260_ch0: ina260@40 { //3.3V monitor
+		compatible = "ti,ina260";
+		reg = <0x40>;
+	};
+	ina260_ch1: ina260@41 { //12V monitor
+		compatible = "ti,ina260";
+		reg = <0x41>;
+	};
+	ina260_ch2: ina260@4A { //GPS monitor
+		compatible = "ti,ina260";
+		reg = <0x4A>;
+	};
+	ina260_ch3: ina260@45 { //7V monitor
+		compatible = "ti,ina260";
+		reg = <0x45>;
+	};
+	tmp117: tmp117@48 {
+		compatible = "ti,tmp117";
+		reg = <0x48>;
+	};
+
+};
+
+// GPIO Expander IO
+/ {
+
+    // Define the GPIO outputs based on your schematic
+    gpio_outputs {
+        compatible = "gpio-leds";  // Using gpio-leds as a convenient container
+    };
+
+    // Define GPIO inputs
+    gpio_inputs {
+      compatible = "gpio-keys"; 
+    };
+	
+    radfet_gpio {
+        compatible = "gpio-leds";
+        
+        module1_enable: module1-enable {
+            gpios = <&gpio0 3 GPIO_ACTIVE_HIGH>;
+            label = "Module1 Enable CTRL";
+        };
+        
+        module1_r1: module1-r1 {
+            gpios = <&gpio0 2 GPIO_ACTIVE_HIGH>;
+            label = "Module1 R1 CTRL";
+        };
+        
+        module1_r2: module1-r2 {
+            gpios = <&gpio0 4 GPIO_ACTIVE_HIGH>;
+            label = "Module1 R2 CTRL";
+        };
+        
+        module2_enable: module2-enable {
+            gpios = <&gpio0 6 GPIO_ACTIVE_HIGH>;
+            label = "Module2 Enable CTRL";
+        };
+        
+        module2_r1: module2-r1 {
+            gpios = <&gpio0 5 GPIO_ACTIVE_HIGH>;
+            label = "Module2 R1 CTRL";
+        };
+        
+        module2_r2: module2-r2 {
+            gpios = <&gpio0 7 GPIO_ACTIVE_HIGH>;
+            label = "Module2 R2 CTRL";
+        };
+    };
+};

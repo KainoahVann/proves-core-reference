@@ -1,0 +1,5 @@
+config BOARD_CYGNET_PAYLOAD_BOARD
+	bool "Cygnet payload board"
+	default y
+
+rsource "../../../boards/bronco_space/cygnet_payload_board/Kconfig.defconfig"
